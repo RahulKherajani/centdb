@@ -1,8 +1,10 @@
 package services;
 
 import Constants.Datatype;
+import Constants.Operation;
 import model.Column;
 import model.Table;
+import model.WhereCondition;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -14,10 +16,14 @@ class DatabaseServicesTest {
 
     @org.junit.jupiter.api.Test
     void createDatabase() {
+        DatabaseServices services = new DatabaseServicesImpl();
+        services.createDatabase("test");
     }
 
     @org.junit.jupiter.api.Test
     void useDatabase() {
+        DatabaseServices services = new DatabaseServicesImpl();
+        services.useDatabase("test");
     }
 
     @org.junit.jupiter.api.Test
@@ -36,17 +42,18 @@ class DatabaseServicesTest {
         list.add(column);
         list.add(column2);
 
-
         services.createTable("users",list);
 
     }
 
     @Test
-    void insertTable() {
+    void insertTable() throws IOException {
         DatabaseServicesImpl services = new DatabaseServicesImpl();
+        services.useDatabase("test");
         ArrayList<String[]> list = new ArrayList<String[]>();
         list.add(new String[]{"shiv","101"});
         list.add(new String[]{"shiv2","102"});
+        list.add(new String[]{"vignesh","112"});
         Table table = new Table();
         table.setRows(list);
         table.setColumnCount(2);
@@ -63,8 +70,15 @@ class DatabaseServicesTest {
     }
 
     @org.junit.jupiter.api.Test
-    void deleteTable() {
+    void deleteTable() throws IOException {
+        DatabaseServices services = new DatabaseServicesImpl();
+        services.useDatabase("test");
+        WhereCondition whereCondition = new WhereCondition();
 
+        whereCondition.setColumn("name");
+        whereCondition.setValue("vignesh");
+        whereCondition.setOperation(Operation.EQUALS);
+        services.deleteTable("users", whereCondition);
     }
 
     @org.junit.jupiter.api.Test

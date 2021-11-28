@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9c86c47-ca33-4b19-9629-0123dc536ec2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DatabaseCollections/testDb/test.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,35 +71,25 @@
       <recent name="services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DatabaseServicesTest.dropTable">
-    <configuration name="DatabaseOperations" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="QueryProcessing.DatabaseOperations" />
-      <module name="DMW_G13_CENTDB" />
+  <component name="RunManager" selected="JUnit.DatabaseServicesTest.deleteTable">
+    <configuration name="DatabaseServicesTest.createDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dmw_g13_centdb" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="QueryProcessing.*" />
+          <option name="PATTERN" value="services.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
+      <option name="METHOD_NAME" value="createDatabase" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main.Main" />
-      <module name="DMW_G13_CENTDB" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DatabaseServicesTest.createTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DMW_G13_CENTDB" />
+    <configuration name="DatabaseServicesTest.createTable (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dmw_g13_centdb" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="services.*" />
@@ -107,8 +104,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseServicesTest.dropTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DMW_G13_CENTDB" />
+    <configuration name="DatabaseServicesTest.deleteTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dmw_g13_centdb" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="services.*" />
@@ -117,14 +114,14 @@
       </extension>
       <option name="PACKAGE_NAME" value="services" />
       <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
-      <option name="METHOD_NAME" value="dropTable" />
+      <option name="METHOD_NAME" value="deleteTable" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseServicesTest.insertTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DMW_G13_CENTDB" />
+    <configuration name="DatabaseServicesTest.insertTable (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dmw_g13_centdb" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="services.*" />
@@ -139,24 +136,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
+    <configuration name="DatabaseServicesTest.useDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dmw_g13_centdb" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
+      <option name="METHOD_NAME" value="useDatabase" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DatabaseServicesTest.dropTable" />
-        <item itemvalue="JUnit.DatabaseServicesTest.createTable" />
-        <item itemvalue="JUnit.DatabaseServicesTest.insertTable" />
-        <item itemvalue="Application.DatabaseOperations" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.DatabaseServicesTest.deleteTable" />
+        <item itemvalue="JUnit.DatabaseServicesTest.insertTable (1)" />
+        <item itemvalue="JUnit.DatabaseServicesTest.createTable (1)" />
+        <item itemvalue="JUnit.DatabaseServicesTest.useDatabase" />
+        <item itemvalue="JUnit.DatabaseServicesTest.createDatabase" />
       </list>
     </recent_temporary>
   </component>
