@@ -5,6 +5,8 @@ import model.DatabaseResponse;
 import model.Table;
 import model.WhereCondition;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface DatabaseServices {
@@ -12,7 +14,7 @@ public interface DatabaseServices {
 
     DatabaseResponse useDatabase(String dbName);
 
-    DatabaseResponse createTable(String tableName, List<Column> columns);
+    DatabaseResponse createTable(String tableName, List<Column> columns) throws IOException;
 
     DatabaseResponse insertTable(String tableName, Table tableDate);
 

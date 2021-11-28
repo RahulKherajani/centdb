@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9c86c47-ca33-4b19-9629-0123dc536ec2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/QueryProcessing/DatabaseOperations.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/QueryValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/java/services/DatabaseServicesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/Datatype.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Constants/Datatype.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/MenuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Constants/MenuConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Constants/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Constants/QueryConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/QueryProcessing/DatabaseOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/QueryProcessing/DatabaseOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/CryptoHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/User/CryptoHash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/FileOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/User/FileOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/UserMenuDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/User/UserMenuDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/User/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/QueryValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Utility/QueryValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Utility/Utility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/model/Column.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/DatabaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/model/DatabaseResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/model/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/WhereCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/model/WhereCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/services/DatabaseServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +36,20 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="2139BJddZm8ZEJ4HA6LuqsEXyoG" />
   <component name="ProjectViewState">
@@ -33,16 +60,25 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/DatabaseCollection/shivDb1" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="services" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.DatabaseOperations">
+  <component name="RunManager" selected="JUnit.DatabaseServicesTest.dropTable">
     <configuration name="DatabaseOperations" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="QueryProcessing.DatabaseOperations" />
       <module name="DMW_G13_CENTDB" />
@@ -69,6 +105,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DatabaseServicesTest.createTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DMW_G13_CENTDB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
+      <option name="METHOD_NAME" value="createTable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabaseServicesTest.dropTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DMW_G13_CENTDB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
+      <option name="METHOD_NAME" value="dropTable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabaseServicesTest.insertTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DMW_G13_CENTDB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
+      <option name="METHOD_NAME" value="insertTable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -82,6 +166,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DatabaseServicesTest.dropTable" />
+        <item itemvalue="JUnit.DatabaseServicesTest.createTable" />
+        <item itemvalue="JUnit.DatabaseServicesTest.insertTable" />
         <item itemvalue="Application.DatabaseOperations" />
         <item itemvalue="Application.Main" />
       </list>

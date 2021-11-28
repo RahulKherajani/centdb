@@ -7,5 +7,6 @@ public class QueryConstants {
     public static final String CREATE_TABLE="CREATE TABLE";
     public static final String SELECT="SELECT";
     public static String CURRENT_DB="";
+    public static final String DB_PATH="DatabaseCollection/";
 
 }
