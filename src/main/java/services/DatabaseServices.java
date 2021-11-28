@@ -18,7 +18,7 @@ public interface DatabaseServices {
 
     DatabaseResponse insertTable(String tableName, Table tableDate) throws IOException;
 
-    DatabaseResponse selectTable(String tableName, WhereCondition whereCondition);
+    DatabaseResponse selectTable(String tableName, String columns, WhereCondition whereCondition);
 
     DatabaseResponse updateTable(String tableName, String column, String value, WhereCondition whereCondition);
 
