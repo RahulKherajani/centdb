@@ -7,6 +7,7 @@ public class Table {
     private ArrayList<String[]> rows;
     private int columnCount;
 
+
     public String[] getColumns() {
         return columns;
     }
