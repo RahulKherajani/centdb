@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9c86c47-ca33-4b19-9629-0123dc536ec2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/main/java/Constants/Datatype.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/Datatype.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Constants/MenuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/MenuConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Constants/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/Operation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/QueryProcessing/DatabaseOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryProcessing/DatabaseOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/User/CryptoHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/CryptoHash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/User/FileOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/FileOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/User/UserMenuDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/UserMenuDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/User/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/UserProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Utility/QueryValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/QueryValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Utility/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/Utility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/model/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Column.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/model/DatabaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/DatabaseResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/model/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/model/WhereCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/WhereCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/services/DatabaseServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/services/DatabaseServicesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/java/services/MetadataServices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/java/services/MetadataServicesImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Constants/QueryConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/model/DatabaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/model/DatabaseResponse.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
