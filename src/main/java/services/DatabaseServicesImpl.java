@@ -105,7 +105,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
     }
 
     @Override
-    public DatabaseResponse selectTable(String tableName, WhereCondition whereCondition) {
+    public DatabaseResponse selectTable(String tableName, String columns, WhereCondition whereCondition) {
 
         return null;
     }
