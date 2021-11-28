@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9c86c47-ca33-4b19-9629-0123dc536ec2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/java/services/MetadataServices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/java/services/MetadataServicesImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DatabaseCollections/testDb/test.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Constants/QueryConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/model/DatabaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/model/DatabaseResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,11 +34,15 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="2139BJddZm8ZEJ4HA6LuqsEXyoG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -191,5 +191,8 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
