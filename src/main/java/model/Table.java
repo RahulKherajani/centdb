@@ -27,7 +27,7 @@ public class Table {
     }
 
     public void setRow(String[] rows) {
-        if(this.rows.isEmpty()){
+        if(this.rows == null){
             this.rows = new ArrayList<>();
         }
         this.rows.add(rows);
