@@ -10,15 +10,9 @@
       <change afterPath="$PROJECT_DIR$/target/classes/services/MetadataServicesImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseCollections/test/users.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseCollections/test/users.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
