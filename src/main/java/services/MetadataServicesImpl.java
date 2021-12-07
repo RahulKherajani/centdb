@@ -49,6 +49,24 @@ public class MetadataServicesImpl implements MetadataServices {
     }
 
     @Override
+    public List<String> getDatabases(String dbName) throws DatabaseException {
+        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        if (!tableDetails.isFile()) {
+            throw new DatabaseException("Metafile not found");
+        }
+        List<String> databases = new ArrayList<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                databases.add(temp.split(DELIMITER)[1]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return databases;
+    }
+
+    @Override
     public List<String> getTables(String dbName) throws DatabaseException {
         File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetails.isFile()) {
