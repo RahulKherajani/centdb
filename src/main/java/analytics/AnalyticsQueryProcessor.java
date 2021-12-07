@@ -7,24 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Constants.QueryConstants;
+import exceptions.DatabaseException;
+import services.MetadataServices;
+import services.MetadataServicesImpl;
+
 public class AnalyticsQueryProcessor {
 
 	static String QUERY_LOG_FILE = "./src/main/resources/logs/query_logs.txt";
 
 	private static List<QueryLogResponse> queryLogResponse = new ArrayList<QueryLogResponse>();
 
-	private static List<String> tables = new ArrayList<String>();
-
 	private static AnalyticsWriter analyticsWriter = new AnalyticsWriter();
 
-	private static String loggedInUser = "SDEY"; // Get LoggedIn User Here
+	private static String loggedInUser = QueryConstants.CURRENT_USER;
+	
+	private MetadataServices metaServices = new MetadataServicesImpl();
 
 	public AnalyticsQueryProcessor() {
 
 		readQueryLog();
-		tables.add("Employee");
-		tables.add("Department");
-
 	}
 
 	public static void readQueryLog() {
@@ -106,11 +108,20 @@ public class AnalyticsQueryProcessor {
 
 	public void processCountQueriesByOperation(String query) {
 
+		List<String> tables = new ArrayList<String>();
+		
 		query = query.replace(";", "");
 		String[] fields = query.split(" ");
 		String operation = fields[1];
 		String database = fields[3];
 		String message = "Query:"+query+";"+"~";
+		
+		try {
+			tables = metaServices.getTables(database);
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(String table: tables) {
 			List<QueryLogResponse> response = AnalyticsQueryPredicates.filterQueries(queryLogResponse,
 					AnalyticsQueryPredicates.countQueriesByOperation(database, operation, table));

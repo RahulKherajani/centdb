@@ -1,6 +1,9 @@
 package analytics;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
+
+import Utility.Utility;
 
 public class AnalyticsQueryParser {
 	
@@ -89,6 +92,18 @@ public class AnalyticsQueryParser {
 	    	System.out.println("Invalid query!");
 	    }
 	  }
+	
+	public void receiveQuery() throws IOException {
+		
+		String query;
+		do {
+			query = Utility.receiveInput();
+        	if (!query.equals("exit;")) {
+        		parseAnalyticsQuery(query);
+        	}
+    	} while(!query.equals("exit;"));
+
+	}
 	
 	public static void main(String[] args) {
 		AnalyticsQueryParser parser = new AnalyticsQueryParser();
