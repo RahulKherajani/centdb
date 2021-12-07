@@ -58,7 +58,6 @@ public class MetadataServicesImpl implements MetadataServices {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
-                System.out.println(temp);
                 String[] tempArr = temp.split(DELIMITER);
                 if (tempArr[0].equalsIgnoreCase(dbName)) {
                     tables.add(tempArr[1]);

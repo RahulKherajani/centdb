@@ -1,7 +1,10 @@
 package User;
 
 import Constants.MenuConstants;
+import Constants.QueryConstants;
 import Utility.Utility;
+import analytics.AnalyticsQueryParser;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -10,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
+import javax.management.Query;
 
 public class UserMenuDriver {
 
@@ -74,6 +79,7 @@ public class UserMenuDriver {
         validateUser(id, pwd);
 
         if (isSuccessfulValidation) {
+        	QueryConstants.CURRENT_USER = id;
             displayQueriesMenu();
         } else {
             Utility.displayMessage(MenuConstants.InvalidCredentials.getValue());
@@ -98,8 +104,19 @@ public class UserMenuDriver {
 
 
     // place holder. delete later
-    public void displayQueriesMenu() {
+    public void displayQueriesMenu() throws IOException {
         Utility.displayMessage("QUERIES MENU");
+        Utility.displayMessage("1.Write Queries");
+        Utility.displayMessage("2.Export");
+        Utility.displayMessage("3.Data Model");
+        Utility.displayMessage("4.Analytics");
+        String formInput = Utility.receiveInput();
+        if (formInput.equals("4")) {
+        	Utility.displayMessage("Write Analytics Query");
+        	AnalyticsQueryParser ana = new AnalyticsQueryParser();
+        	ana.receiveQuery();
+        }
+        System.out.println("Exiting the Program");
     }
 
     public Boolean validateUser(String id, String pwd) throws IOException, ParseException, NoSuchAlgorithmException {
