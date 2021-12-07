@@ -24,33 +24,47 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
             switch(query_type){
 
-              /* case "create":
-                    query = query.replaceAll(";", "")
-                            .replaceAll(",", " ")
-                            .replaceAll("[^a-zA-Z ]", "")
-                            .toLowerCase();
+               case "create":
 
-                    String[] words = query.split(" ");
+                   query = "CREATE TABLE Persons (PersonID int, Name string, Gender boolean, Salary double, PRIMARY KEY (PersonID));";
+                   query =query.toLowerCase();
+                   String[] words = query.split(" ");
 
                     if(words[1]=="database") {
                         db.createDatabase(words[2]);
                     }
+
                     else if(words[2]=="table"){
-                        Table table1 = new Table();
-                        //set column names
-                        Column col = new Column();
-                        ArrayList<Column> columns = new Column<>();
-                        col.setColumnName();
-                        db.createTable(words[2],);
-                    }
-                    else
-                    {
-                        System.out.println("Invalid Query");
-                    }
-                    break;
 
+                       query =query.toLowerCase();
+                       String CREATE_QUERY_OUTER = "CREATE\\sTABLE\\s(\\w+)\\s";
 
-*/
+                       String CREATE_QUERY_INNER = "\\(((?:\\w+\\s\\w+\\(?[0-9]*\\)?,?)+)\\);";
+
+                       Pattern pattern3 = Pattern.compile(CREATE_QUERY_OUTER + CREATE_QUERY_INNER);
+
+                       Matcher matcher3 = pattern3.matcher(query);
+                       matcher3.find();
+                       boolean match = matcher3.matches ();
+                       if(match == true) {
+
+                           String columnName = matcher3.group(1);
+                           String tableName = matcher3.group(2);
+                           String condition[] = matcher3.group(4).split(" ");
+
+                           WhereCondition whereCondition = new WhereCondition();
+                           whereCondition.setColumn(condition[0]);
+                           whereCondition.setOperation(Operation.valueOf(condition[1]));
+                           whereCondition.setValue(condition[2].replaceAll("\'", ""));
+
+                           db.selectTable(tableName, columnName, whereCondition);
+                       }
+                    }
+                   else {
+                       System.out.println("Invalid query !!");
+                   }
+                   break;
+
                 case "use":
                     query = query.replaceAll(";", "");
                     String[] words1 = query.split(" ");
@@ -58,7 +72,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                     db.useDatabase(db_name);
                     break;
 
-/*
+
                 case "insert":
                     Pattern pattern = Pattern.compile("insert into\\s(.*?)\\s(.*?)\\svalues\\s(.*?);", Pattern.DOTALL);
                     Matcher matcher = pattern.matcher(query);
@@ -75,7 +89,9 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                             .replace("'","")
                             .replace("\"","")
                             .split(",");
-                    ArrayList<String[]> row_values = (ArrayList<String[]>) Arrays.asList(rows);
+
+                    ArrayList<String[]> row_values = new ArrayList<>();
+                    row_values.add(rows);
 
                     Table table1 = new Table();
                     table1.setColumns(columns);
@@ -84,7 +100,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                     db.insertTable(table,table1);
                     break;
 
-  */              case "select":
+               case "select":
 
                     //query = "SELECT * FROM Customers WHERE Country = 'Mexico';
                     query =query.toLowerCase();
@@ -97,7 +113,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
                         String columnName = matcher1.group(1);
                         String tableName = matcher1.group (2);
-                        String condition[] = matcher1.group (4).split(" ");
+                        String[] condition = matcher1.group (4).split(" ");
 
                         WhereCondition whereCondition=new WhereCondition();
                         whereCondition.setColumn(condition[0]);
@@ -121,7 +137,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
                     if(match2) {
                         String tableName = matcher2.group (1);
-                        String[] column_name_and_value = matcher2.group(2).split("=");
+                        String[] columnNameAndValue = matcher2.group(2).split("=");
                         String[] condition = matcher2.group (3).split(" ");
 
                         WhereCondition whereCondition=new WhereCondition();
@@ -129,25 +145,26 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         whereCondition.setOperation(Operation.valueOf(condition[1]));
                         whereCondition.setValue(condition[2].replaceAll("\'",""));
 
-                        db.updateTable(tableName,column_name_and_value[0].trim(),column_name_and_value[1].trim(),whereCondition);
+                        db.updateTable(tableName,columnNameAndValue[0].trim(),columnNameAndValue[1].trim(),whereCondition);
                     }
                     else {
                         System.out.println("Invalid query !!");
                     }
                     break;
 
+
                 case "delete":
 
                     // query = "DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';";
                     query =query.toLowerCase();
 
-                    Pattern pattern = Pattern.compile("delete\\s(.*?)from\\s(.*?)where\\s(.*?)?;");
-                    Matcher matcher = pattern.matcher(query);
-                    boolean match3 = matcher.matches ();
+                    Pattern pattern5 = Pattern.compile("delete\\s(.*?)from\\s(.*?)where\\s(.*?)?;");
+                    Matcher matcher5 = pattern5.matcher(query);
+                    boolean match3 = matcher5.matches ();
 
                     if(match3 == true) {
-                        String tableName = matcher.group (2);
-                        String condition[] = matcher.group (3).split(" ");
+                        String tableName = matcher5.group (2);
+                        String condition[] = matcher5.group (3).split(" ");
 
                         WhereCondition whereCondition=new WhereCondition();
                         whereCondition.setColumn(condition[0]);
@@ -160,6 +177,22 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         System.out.println("Invalid query !!");
                     }
                     break;
+
+                case "drop":
+                    //query=DROP TABLE table_name;
+                    query=query.toLowerCase();
+                    Pattern pattern4 = Pattern.compile("drop\\s(.*?)table\\s(.*?)?;");
+                    Matcher matcher4 = pattern4.matcher(query);
+                    boolean match4 = matcher4.matches();
+
+                    if (match4) {
+                        String tableName = matcher4.group(2);
+                        db.dropTable(tableName);
+                    }
+                    else {
+                        System.out.println("Invalid query");
+                    }
+
             }
 
 
