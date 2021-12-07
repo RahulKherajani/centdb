@@ -1,5 +1,6 @@
 package services;
 
+import exceptions.DatabaseException;
 import model.Column;
 import model.DatabaseResponse;
 import model.Table;
@@ -45,7 +46,7 @@ class MetadataServicesTest {
     }
 
     @Test
-    void getColumnDetailsForTable() {
+    void getColumnDetailsForTable() throws DatabaseException {
         List<Column> columns = metadataServices.getColumnDetailsForTable("user");
         columns.stream().forEach(System.out::println);
     }

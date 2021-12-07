@@ -62,11 +62,49 @@ class DatabaseServicesTest {
     }
 
     @org.junit.jupiter.api.Test
-    void selectTable() {
+    void selectTable() throws IOException {
+        //select name from users where id = 5;
+        DatabaseServices services = new DatabaseServicesImpl();
+        services.useDatabase("test");
+        WhereCondition whereCondition = new WhereCondition();
+        whereCondition.setColumn("id");
+        whereCondition.setOperation(Operation.LESS_THAN);
+        whereCondition.setValue("105");
+//        services.selectTable("users", "id,name", whereCondition);
+        services.selectTable("users", "name", whereCondition);
+//        services.selectTable("users", "*", whereCondition);
+//        DatabaseServices services = new DatabaseServicesImpl();
+//        services.useDatabase("test");
+//        WhereCondition whereCondition = new WhereCondition();
+//        whereCondition.setColumn("id");
+//        whereCondition.setOperation(Operation.EQUALS);
+//        whereCondition.setValue("112");
+//        services.selectTable("users", "*", whereCondition);
     }
 
     @org.junit.jupiter.api.Test
-    void updateTable() {
+    void updateTable() throws IOException {
+        // update users set name = "rohitsharma" where id = 112;
+
+//        DatabaseServices services = new DatabaseServicesImpl();
+//        services.useDatabase("test");
+//        WhereCondition whereCondition = new WhereCondition();
+//
+//        whereCondition.setColumn("id");
+//        whereCondition.setValue("112");
+//        whereCondition.setOperation(Operation.EQUALS);
+//
+//        services.updateTable("users", "name", "vk", whereCondition);
+
+        DatabaseServices services = new DatabaseServicesImpl();
+        services.useDatabase("test");
+        WhereCondition whereCondition = new WhereCondition();
+
+        whereCondition.setColumn("id");
+        whereCondition.setValue("99");
+        whereCondition.setOperation(Operation.LESS_THAN);
+
+        services.updateTable("users", "name", "greatest", whereCondition);
     }
 
     @org.junit.jupiter.api.Test
