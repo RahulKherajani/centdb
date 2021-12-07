@@ -55,4 +55,9 @@ class MetadataServicesTest {
     void dropTable() {
         metadataServices.dropTable("test");
     }
+
+    @Test
+    void getTables() throws DatabaseException{
+        System.out.println(metadataServices.getTables("testDb"));
+    }
 }

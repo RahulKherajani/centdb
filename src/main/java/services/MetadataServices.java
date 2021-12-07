@@ -11,6 +11,8 @@ import java.util.List;
 public interface MetadataServices {
     DatabaseResponse createMeta() throws IOException;
 
+    List<String> getTables(String dbName) throws DatabaseException;
+
     DatabaseResponse insertColumnDetailsTable(Table table);
 
     DatabaseResponse insertTableDetailsTable(Table table);
