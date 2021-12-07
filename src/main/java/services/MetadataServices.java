@@ -13,6 +13,8 @@ public interface MetadataServices {
 
     List<String> getTables(String dbName) throws DatabaseException;
 
+    boolean isTableLocked(String tableName) throws DatabaseException;
+
     DatabaseResponse insertColumnDetailsTable(Table table);
 
     DatabaseResponse insertTableDetailsTable(Table table);

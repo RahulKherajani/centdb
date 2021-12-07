@@ -41,7 +41,7 @@ public class MetadataServicesImpl implements MetadataServices {
         if (!tableDetailsTable.isFile()) {
             tableDetailsTable.createNewFile();
             FileWriter fileWriter = new FileWriter(tableDetailsTable);
-            fileWriter.write("Database" + DELIMITER + "TableName" + EOL);
+            fileWriter.write("Database" + DELIMITER + "TableName" + DELIMITER + "isLocked" + EOL);
             fileWriter.close();
         }
 
@@ -50,12 +50,12 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public List<String> getTables(String dbName) throws DatabaseException {
-        File columnDetailsTable = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
-        if (!columnDetailsTable.isFile()) {
+        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        if (!tableDetails.isFile()) {
             throw new DatabaseException("Metafile not found");
         }
         List<String> tables = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(columnDetailsTable))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
                 System.out.println(temp);
@@ -68,6 +68,30 @@ public class MetadataServicesImpl implements MetadataServices {
             e.printStackTrace();
         }
         return tables;
+    }
+
+    @Override
+    public boolean isTableLocked(String tableName) throws DatabaseException {
+        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        if (!tableDetails.isFile()) {
+            throw new DatabaseException("Metafile not found");
+        }
+        boolean flag = false;
+        String dbName = CURRENT_DB;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                System.out.println(temp);
+                String[] tempArr = temp.split(DELIMITER);
+                if (tempArr[0].equalsIgnoreCase(dbName) && tempArr[1].equalsIgnoreCase(tableName)) {
+                    flag = tempArr[2].equalsIgnoreCase("1");
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
     @Override
