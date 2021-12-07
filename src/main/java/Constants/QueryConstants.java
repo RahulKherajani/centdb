@@ -10,6 +10,6 @@ public class QueryConstants {
     public static final String DB_PATH="DatabaseCollections/";
 
     public static String SLASH = "/";
-    public static String DELIMITER = "`";
+    public static String DELIMITER = "~";
     public static String EOL = "\n";
 }
