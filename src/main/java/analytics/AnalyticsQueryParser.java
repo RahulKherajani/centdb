@@ -105,8 +105,8 @@ public class AnalyticsQueryParser {
 
 	}
 	
-	public static void main(String[] args) {
-		AnalyticsQueryParser parser = new AnalyticsQueryParser();
-		parser.parseAnalyticsQuery("count update queries DB1;");
-	}
+//	public static void main(String[] args) {
+//		AnalyticsQueryParser parser = new AnalyticsQueryParser();
+//		parser.parseAnalyticsQuery("count update queries DB1;");
+//	}
 }
