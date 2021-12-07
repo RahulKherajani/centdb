@@ -11,7 +11,7 @@ import java.util.List;
 public interface MetadataServices {
     DatabaseResponse createMeta() throws IOException;
 
-    List<String> getDatabases(String dbName) throws DatabaseException;
+    List<String> getDatabases() throws DatabaseException;
 
     List<String> getTables(String dbName) throws DatabaseException;
 

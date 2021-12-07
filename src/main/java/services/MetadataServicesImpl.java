@@ -10,6 +10,7 @@ import model.Table;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static Constants.QueryConstants.*;
 
@@ -49,7 +50,7 @@ public class MetadataServicesImpl implements MetadataServices {
     }
 
     @Override
-    public List<String> getDatabases(String dbName) throws DatabaseException {
+    public List<String> getDatabases() throws DatabaseException {
         File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetails.isFile()) {
             throw new DatabaseException("Metafile not found");
@@ -57,13 +58,16 @@ public class MetadataServicesImpl implements MetadataServices {
         List<String> databases = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
             String temp;
+            int i =0;
             while ((temp = bufferedReader.readLine()) != null) {
+                if(i==0)continue;
+                i++;
                 databases.add(temp.split(DELIMITER)[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return databases;
+        return databases.stream().distinct().collect(Collectors.toList());
     }
 
     @Override
