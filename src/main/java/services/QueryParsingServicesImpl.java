@@ -52,12 +52,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                            String tableName = matcher3.group(2);
                            String condition[] = matcher3.group(4).split(" ");
 
-                           WhereCondition whereCondition = new WhereCondition();
-                           whereCondition.setColumn(condition[0]);
-                           whereCondition.setOperation(Operation.valueOf(condition[1]));
-                           whereCondition.setValue(condition[2].replaceAll("\'", ""));
 
-                           db.selectTable(tableName, columnName, whereCondition);
                        }
                     }
                    else {
