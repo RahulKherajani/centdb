@@ -13,6 +13,13 @@ import java.io.*;
 import java.util.*;
 
 public class DatabaseServicesImpl implements DatabaseServices{
+
+    private MetadataServices metadataServices;
+
+    public DatabaseServicesImpl(){
+        metadataServices = new MetadataServicesImpl();
+    }
+
     @Override
     public DatabaseResponse createDatabase(String dbName) {
         String dbPath = QueryConstants.DB_PATH +dbName;
@@ -69,6 +76,18 @@ public class DatabaseServicesImpl implements DatabaseServices{
         columnNameWriter.write(sb.toString() + "\n");
         columnNameWriter.close();
         Utility.displayMessage("Created");
+
+        //Insert Meta Table
+        Table table = new Table();
+        table.setRow(new String[]{QueryConstants.CURRENT_DB,tableName,"0"});
+        metadataServices.insertTableDetailsTable(table);
+
+        //Insert Meta Columns
+        table = new Table();
+        for (Column column:columns) {
+            table.setRow(new String[]{tableName,column.getColumnName(),column.getDatatype().toString(),String.join(",",column.getConstraints())});
+        }
+        metadataServices.insertColumnDetailsTable(table);
         return new DatabaseResponse(true,"Created "+tableName);
     }
 
@@ -579,6 +598,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
                 return new DatabaseResponse(true, tableName + " has been deleted successfully");
             }
         }
+        metadataServices.dropTable(tableName);
         return new DatabaseResponse(false, tableName + " Error deleting");
     }
 }
