@@ -7,6 +7,12 @@ public class WhereCondition {
     private Operation operation;
     private String value;
 
+    public WhereCondition(){}
+    public WhereCondition(String column, String value) {
+        this.column = column;
+        this.value = value;
+    }
+
     public String getColumn() {
         return column;
     }

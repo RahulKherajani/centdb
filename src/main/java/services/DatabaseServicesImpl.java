@@ -3,6 +3,7 @@ package services;
 import Constants.Operation;
 import Constants.QueryConstants;
 import Utility.Utility;
+import exceptions.DatabaseException;
 import model.Column;
 import model.DatabaseResponse;
 import model.Table;
@@ -16,6 +17,13 @@ import java.util.*;
 public class DatabaseServicesImpl implements DatabaseServices{
 
     private static int lock = 0;
+    private final MetadataServices metadataServices;
+    private final ValidationServices validationServices;
+
+    public DatabaseServicesImpl(){
+        metadataServices = new MetadataServicesImpl();
+        validationServices = new ValidationServicesImpl();
+    }
 
     @Override
     public DatabaseResponse createDatabase(String dbName) {
@@ -83,8 +91,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
     }
 
     @Override
-    public DatabaseResponse insertTable(String tableName, Table tableDate) throws IOException {
-
+    public DatabaseResponse insertTable(String tableName, Table tableDate) throws IOException, DatabaseException {
+        if(validationServices.validateInsertData(tableName, tableDate)){
+            Utility.displayMessage("Table Constraint Failure");
+            return new DatabaseResponse(false,"Table Constraint Failure");
+        }
         if(QueryConstants.CURRENT_DB=="") {
             Utility.displayMessage("Please select a database");
             return new DatabaseResponse(false,"Please select a database");
@@ -120,7 +131,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
     // select name from users where id>5
 
     @Override
-    public DatabaseResponse selectTable(String tableName, String columns, WhereCondition whereCondition) throws IOException {
+    public DatabaseResponse selectTable(String tableName, String columns, WhereCondition whereCondition) throws IOException, DatabaseException {
+        if(validationServices.validateWhereCondition(tableName, whereCondition)){
+            Utility.displayMessage("WhereCondition Constraint Failure");
+            return new DatabaseResponse(false,"WhereCondition Constraint Failure");
+        }
         DatabaseResponse databaseResponse = new DatabaseResponse();
         int counterColumn = 0;
         int indexOfColumnUserRequested = 0;
@@ -417,7 +432,15 @@ public class DatabaseServicesImpl implements DatabaseServices{
     }
 
     @Override
-    public DatabaseResponse updateTable(String tableName, String column, String value, WhereCondition whereCondition) throws IOException {
+    public DatabaseResponse updateTable(String tableName, String column, String value, WhereCondition whereCondition) throws IOException, DatabaseException {
+        if(validationServices.validateWhereCondition(tableName, whereCondition)){
+            Utility.displayMessage("WhereCondition Constraint Failure");
+            return new DatabaseResponse(false,"WhereCondition Constraint Failure");
+        }
+        if(validationServices.validateWhereCondition(tableName, new WhereCondition(column, value))){
+            Utility.displayMessage("Datatype Constraint Failure");
+            return new DatabaseResponse(false,"Datatype Constraint Failure");
+        }
 
         if(checkLock()) {
             QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
@@ -549,11 +572,14 @@ public class DatabaseServicesImpl implements DatabaseServices{
     }
 
     @Override
-    public DatabaseResponse deleteTable(String tableName, WhereCondition whereCondition) throws IOException {
+    public DatabaseResponse deleteTable(String tableName, WhereCondition whereCondition) throws IOException, DatabaseException {
         if(checkLock()) {
             QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
         }
-
+        if(validationServices.validateWhereCondition(tableName, whereCondition)) {
+            Utility.displayMessage("WhereCondition Constraint Failure");
+            return new DatabaseResponse(false, "WhereCondition Constraint Failure");
+        }
         if(QueryConstants.CURRENT_DB=="") {
             Utility.displayMessage("Please select a database");
             return new DatabaseResponse(false,"Please select a database");

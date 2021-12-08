@@ -3,6 +3,7 @@ package Main;
 import Constants.Datatype;
 import Constants.Operation;
 import User.UserMenuDriver;
+import exceptions.DatabaseException;
 import logmanagement.GeneralLogWriter;
 
 import model.Column;
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException, ParseException, NoSuchAlgorithmException {
+	public static void main(String[] args) throws IOException, ParseException, NoSuchAlgorithmException, DatabaseException {
         UserMenuDriver driver = new UserMenuDriver();
 
 //        Runnable helloRunnable = new Runnable() {
@@ -40,7 +41,7 @@ public class Main {
         transcation();
     }
 
-    public static void transcation () throws IOException {
+    public static void transcation () throws IOException, DatabaseException {
         DatabaseServicesImpl obj = new DatabaseServicesImpl();
         obj.createDatabase("test2");
         obj.useDatabase("test2");

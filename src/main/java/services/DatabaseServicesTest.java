@@ -2,6 +2,7 @@ package services;
 
 import Constants.Datatype;
 import Constants.Operation;
+import exceptions.DatabaseException;
 import model.Column;
 import model.Table;
 import model.WhereCondition;
@@ -29,7 +30,7 @@ class DatabaseServicesTest {
     }
 
     @org.junit.jupiter.api.Test
-    void createTable() throws IOException {
+    void createTable() throws IOException, DatabaseException {
 //        DatabaseServices services = new DatabaseServicesImpl();
 //        services.createDatabase("test");
 //        services.useDatabase("test");
@@ -63,7 +64,7 @@ class DatabaseServicesTest {
     }
 
     @Test
-    void insertTable() throws IOException {
+    void insertTable() throws IOException, DatabaseException {
 //        DatabaseServicesImpl services = new DatabaseServicesImpl();
 //        services.useDatabase("test");
 //        ArrayList<String[]> list = new ArrayList<String[]>();
@@ -93,7 +94,7 @@ class DatabaseServicesTest {
     }
 
     @org.junit.jupiter.api.Test
-    void selectTable() throws IOException {
+    void selectTable() throws IOException, DatabaseException {
         //select name from users where id = 5;
         DatabaseServices services = new DatabaseServicesImpl();
         services.useDatabase("seven");
@@ -114,7 +115,7 @@ class DatabaseServicesTest {
     }
 
     @org.junit.jupiter.api.Test
-    void updateTable() throws IOException {
+    void updateTable() throws IOException, DatabaseException {
         // update users set name = "rohitsharma" where id = 112;
 
 //        DatabaseServices services = new DatabaseServicesImpl();
@@ -139,7 +140,7 @@ class DatabaseServicesTest {
     }
 
     @org.junit.jupiter.api.Test
-    void deleteTable() throws IOException {
+    void deleteTable() throws IOException, DatabaseException {
         DatabaseServices services = new DatabaseServicesImpl();
         services.useDatabase("seven");
         WhereCondition whereCondition = new WhereCondition();
