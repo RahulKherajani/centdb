@@ -86,7 +86,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                 case "use":
                     query = query.replaceAll(";", "");
                     String[] words1 = query.split(" ");
-                    String dbName = words1[2];
+                    String dbName = words1[1];
                     db.useDatabase(dbName);
                     break;
 

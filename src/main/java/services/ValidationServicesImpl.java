@@ -5,7 +5,6 @@ import exceptions.DatabaseException;
 import model.Column;
 import model.Table;
 import model.WhereCondition;
-import sun.awt.X11.XSystemTrayPeer;
 
 import java.io.File;
 import java.util.Arrays;
