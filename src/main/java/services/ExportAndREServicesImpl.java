@@ -38,19 +38,23 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                 System.out.println("DROP TABLE IF EXISTS `" + table + "`;\n");
 
                 //Create
-                bufferedWriter.append("CREATE TABLE `" + table + "` (");
-                System.out.println("CREATE TABLE `" + table + "` (");
+                bufferedWriter.append("CREATE TABLE `" + table + "` (").append(EOL);
+                System.out.println("CREATE TABLE `" + table + "` ("+EOL);
                 List<Column> columns = metadataServices.getColumnDetailsForTable(table);
                 for (Column column : columns) {
+                    String constraints = "";
+                    if(column.getConstraints() != null) {
+                        constraints = String.join(",", column.getConstraints());
+                    }
                     bufferedWriter.append("\t `"
                             + column.getColumnName() + "` "
                             + column.getDatatype().type + " "
-                            + String.join(" ", column.getConstraints())
+                            + String.join(" ", constraints)
                             + "\n");
                     System.out.println("\t `"
                             + column.getColumnName() + "` "
                             + column.getDatatype().type + " "
-                            + String.join(" ", column.getConstraints())
+                            + String.join(" ", constraints)
                             + "\n");
                 }
                 bufferedWriter.append(");\n");
@@ -132,15 +136,18 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                 //Columns
                 bufferedWriter.append("____________________________________________________________________________________________________________\n");
                 System.out.println("____________________________________________________________________________________________________________\n");
-                String temp = String.format("|%s|%s|%s|%s|%s|%s|\n","Field","Type","Null","Key","Default","Extra");
+                String temp = String.format("|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n","Field","Type","Null","Key","Default","Extra");
                 bufferedWriter.append(temp);
                 System.out.println(temp);
                 bufferedWriter.append("____________________________________________________________________________________________________________\n");
                 System.out.println("____________________________________________________________________________________________________________\n");
-               List<Column> columns = metadataServices.getColumnDetailsForTable(table);
+                List<Column> columns = metadataServices.getColumnDetailsForTable(table);
                 for (Column column : columns) {
-                    String constraints = String.join(",",column.getConstraints());
-                    String tt= String.format("|%s|%s|%s|%s|%s|%s|\n",
+                    String constraints = "";
+                    if(column.getConstraints() != null) {
+                        constraints = String.join(",", column.getConstraints());
+                    }
+                    String tt= String.format("|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|\n",
                             column.getColumnName(),
                             column.getDatatype().toString(),
                             constraints.contains("not null") ? "NO":"YES",
@@ -149,6 +156,8 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                     bufferedWriter.append(tt);
                     System.out.println(tt);
                 }
+                bufferedWriter.append("____________________________________________________________________________________________________________\n");
+                System.out.println("____________________________________________________________________________________________________________\n");
             }
             bufferedWriter.flush();
         } catch (IOException io) {

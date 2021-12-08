@@ -101,7 +101,6 @@ public class MetadataServicesImpl implements MetadataServices {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
-                System.out.println(temp);
                 String[] tempArr = temp.split(DELIMITER);
                 if (tempArr[0].equalsIgnoreCase(dbName) && tempArr[1].equalsIgnoreCase(tableName)) {
                     flag = tempArr[2].equalsIgnoreCase("1");
@@ -160,8 +159,6 @@ public class MetadataServicesImpl implements MetadataServices {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(columnDetailsTable))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
-                System.out.println(temp);
-                System.out.println(tableName);
                 String[] tempArr = temp.split(DELIMITER);
                 String tempTable = tempArr[0];
                 if (tempTable.equalsIgnoreCase(tableName)) {
@@ -188,7 +185,6 @@ public class MetadataServicesImpl implements MetadataServices {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(columnDetailsTable))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
-                System.out.println(temp);
                 String[] tempArr = temp.split(DELIMITER);
                 if (!tempArr[0].equalsIgnoreCase(tableName)) {
                     finalValues.append(temp).append(EOL);
@@ -218,7 +214,6 @@ public class MetadataServicesImpl implements MetadataServices {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
-                System.out.println(temp);
                 String[] tempArr = temp.split(DELIMITER);
                 if (!tempArr[1].equalsIgnoreCase(tableName)) {
                     finalValuesTable.append(temp).append(EOL);
