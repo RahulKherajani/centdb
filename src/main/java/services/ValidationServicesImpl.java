@@ -107,8 +107,6 @@ public class ValidationServicesImpl implements ValidationServices {
     public boolean validateWhereCondition(String tableName, WhereCondition whereCondition) throws DatabaseException {
         if(whereCondition == null) return true;
         List<Column> columns = metadataServices.getColumnDetailsForTable(tableName);
-        System.out.println(columns);
-        System.out.println(whereCondition.toString());
         Datatype datatype = columns.stream().
                 filter(x -> x.getColumnName().equalsIgnoreCase(whereCondition.getColumn().trim()))
                 .collect(Collectors.toList())

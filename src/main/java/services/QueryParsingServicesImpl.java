@@ -228,6 +228,20 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                     else {
                         System.out.println("Invalid query");
                     }
+                    break;
+                case "begin":
+                    query = query.replaceAll(";", "");
+                    if(query.equalsIgnoreCase("BEGIN TRANSACTION")){
+                        db.beginTransaction();
+                    }
+                    else{
+                        System.out.println("Invalid query");
+                    }
+                    break;
+                case "commit":
+                case "rollback":
+                    query = query.replaceAll(";", "");
+                    db.endTransaction(query);
 
             }
 
