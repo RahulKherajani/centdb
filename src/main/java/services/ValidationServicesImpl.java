@@ -5,6 +5,7 @@ import exceptions.DatabaseException;
 import model.Column;
 import model.Table;
 import model.WhereCondition;
+import sun.awt.X11.XSystemTrayPeer;
 
 import java.io.File;
 import java.util.Arrays;
@@ -83,7 +84,11 @@ public class ValidationServicesImpl implements ValidationServices {
             for(int j=0;j<rows.length;j++){
                 String column = table.getColumns()[j];
                 String value = rows[j];
-                Datatype datatype = columns.stream().filter(x -> x.getColumnName().equalsIgnoreCase(column)).collect(Collectors.toList()).get(0).getDatatype();
+                Datatype datatype = columns.stream()
+                        .filter(x -> x.getColumnName().equalsIgnoreCase(column))
+                        .collect(Collectors.toList())
+                        .get(0)
+                        .getDatatype();
                 if (datatype == Datatype.INT) {
                     if(!isInt(value)) flag = false;
                 } else if (datatype == Datatype.STRING) {
@@ -100,8 +105,15 @@ public class ValidationServicesImpl implements ValidationServices {
 
     @Override
     public boolean validateWhereCondition(String tableName, WhereCondition whereCondition) throws DatabaseException {
+        if(whereCondition == null) return true;
         List<Column> columns = metadataServices.getColumnDetailsForTable(tableName);
-        Datatype datatype = columns.stream().filter(x -> x.getColumnName().equalsIgnoreCase(whereCondition.getColumn())).collect(Collectors.toList()).get(0).getDatatype();
+        System.out.println(columns);
+        System.out.println(whereCondition.toString());
+        Datatype datatype = columns.stream().
+                filter(x -> x.getColumnName().equalsIgnoreCase(whereCondition.getColumn().trim()))
+                .collect(Collectors.toList())
+                .get(0)
+                .getDatatype();
         if (datatype == Datatype.INT) {
             return isInt(whereCondition.getValue());
         } else if (datatype == Datatype.STRING) {

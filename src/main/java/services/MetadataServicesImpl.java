@@ -160,8 +160,11 @@ public class MetadataServicesImpl implements MetadataServices {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(columnDetailsTable))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
+                System.out.println(temp);
+                System.out.println(tableName);
                 String[] tempArr = temp.split(DELIMITER);
-                if (tempArr[0].equalsIgnoreCase(tableName)) {
+                String tempTable = tempArr[0];
+                if (tempTable.equalsIgnoreCase(tableName)) {
                     Column column = new Column();
                     column.setColumnName(tempArr[1]);
                     column.setDatatype(Datatype.valueOf(tempArr[2]));

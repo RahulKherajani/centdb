@@ -12,6 +12,7 @@ import model.WhereCondition;
 import org.json.simple.parser.ParseException;
 import services.DatabaseServices;
 import services.DatabaseServicesImpl;
+import services.QueryParsingServicesImpl;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -26,19 +27,20 @@ public class Main {
 	public static void main(String[] args) throws IOException, ParseException, NoSuchAlgorithmException, DatabaseException {
         UserMenuDriver driver = new UserMenuDriver();
 
-//        Runnable helloRunnable = new Runnable() {
-//            public void run() {
-//            	GeneralLogWriter.addMetadata();
-//            }
-//        };
-//
-//        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-//        executor.scheduleAtFixedRate(helloRunnable, 0, 60, TimeUnit.SECONDS);
-//
-//        driver.showForm();
-//        executor.shutdown();
+        Runnable helloRunnable = new Runnable() {
+            public void run() {
+            	GeneralLogWriter.addMetadata();
+            }
+        };
 
-        transcation();
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 60, TimeUnit.SECONDS);
+
+//        driver.showForm();
+        new QueryParsingServicesImpl().receiveQuery();
+        executor.shutdown();
+
+//        transcation();
     }
 
     public static void transcation () throws IOException, DatabaseException {

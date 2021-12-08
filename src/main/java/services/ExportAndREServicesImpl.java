@@ -35,9 +35,11 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
             for (String table : tables) {
                 //Drop
                 bufferedWriter.append("DROP TABLE IF EXISTS `" + table + "`;\n");
+                System.out.println("DROP TABLE IF EXISTS `" + table + "`;\n");
 
                 //Create
                 bufferedWriter.append("CREATE TABLE `" + table + "` (");
+                System.out.println("CREATE TABLE `" + table + "` (");
                 List<Column> columns = metadataServices.getColumnDetailsForTable(table);
                 for (Column column : columns) {
                     bufferedWriter.append("\t `"
@@ -45,14 +47,22 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                             + column.getDatatype().type + " "
                             + String.join(" ", column.getConstraints())
                             + "\n");
+                    System.out.println("\t `"
+                            + column.getColumnName() + "` "
+                            + column.getDatatype().type + " "
+                            + String.join(" ", column.getConstraints())
+                            + "\n");
                 }
                 bufferedWriter.append(");\n");
+                System.out.println(");\n");
 
                 //Lock Table
                 bufferedWriter.append("LOCK TABLES `" + table + "` WRITE;\n");
+                System.out.println("LOCK TABLES `" + table + "` WRITE;\n");
 
                 //Insert
                 bufferedWriter.append("INSERT INTO `" + table + "` VALUES ");
+                System.out.println("INSERT INTO `" + table + "` VALUES ");
                 DatabaseServices databaseServices = new DatabaseServicesImpl();
                 Table table1 = databaseServices.selectTable(table, "*", null).getTableData();
                 List<String> tempList = new ArrayList<>();
@@ -61,15 +71,19 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                     tempList.add("(" + temp + ")");
                 }
                 bufferedWriter.append(String.join(",", tempList));
+                System.out.println(String.join(",", tempList));
                 bufferedWriter.append(";\n");
+                System.out.println(";\n");
 
                 //UNLOCK
                 bufferedWriter.append("UNLOCK TABLES;\n");
+                System.out.println("UNLOCK TABLES;\n");
             }
             bufferedWriter.flush();
         } catch (IOException io) {
             io.printStackTrace();
         }
+        System.out.println("Dump created successfully: "+fileName);
     }
 
     @Override
@@ -90,34 +104,56 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
 
             //Tables
             bufferedWriter.append("___________________________\n");
+            System.out.println("___________________________\n");
             bufferedWriter.append(String.format("|%-25s|\n","Tables"));
+            System.out.println(String.format("|%-25s|\n","Tables"));
             bufferedWriter.append("___________________________\n");
+            System.out.println("___________________________\n");
             tables.stream()
-                    .forEach(table->System.out.println(String.format("|%-25s|\n",table)));
+                    .forEach(table->{
+                        try {
+                            bufferedWriter.append(String.format("|%-25s|\n",table));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(String.format("|%-25s|\n",table));
+                    });
             bufferedWriter.append("___________________________\n");
+            System.out.println("___________________________\n");
             bufferedWriter.append(EOL);
+            System.out.println(EOL);
             bufferedWriter.append(EOL);
+            System.out.println(EOL);
             bufferedWriter.append(EOL);
+            System.out.println(EOL);
             for (String table : tables) {
                 bufferedWriter.append("Table Name:"+table).append(EOL);
+                System.out.println("Table Name:"+table+EOL);
                 //Columns
                 bufferedWriter.append("____________________________________________________________________________________________________________\n");
-                bufferedWriter.append(String.format("|%s|%s|%s|%s|%s|%s|\n","Field","Type","Null","Key","Default","Extra"));
+                System.out.println("____________________________________________________________________________________________________________\n");
+                String temp = String.format("|%s|%s|%s|%s|%s|%s|\n","Field","Type","Null","Key","Default","Extra");
+                bufferedWriter.append(temp);
+                System.out.println(temp);
                 bufferedWriter.append("____________________________________________________________________________________________________________\n");
+                System.out.println("____________________________________________________________________________________________________________\n");
                List<Column> columns = metadataServices.getColumnDetailsForTable(table);
                 for (Column column : columns) {
                     String constraints = String.join(",",column.getConstraints());
-                    bufferedWriter.append(String.format("|%s|%s|%s|%s|%s|%s|\n",
+                    String tt= String.format("|%s|%s|%s|%s|%s|%s|\n",
                             column.getColumnName(),
                             column.getDatatype().toString(),
                             constraints.contains("not null") ? "NO":"YES",
                             constraints.contains("primary") ? "PRI":"",
-                            "NULL",""));
+                            "NULL","");
+                    bufferedWriter.append(tt);
+                    System.out.println(tt);
                 }
             }
             bufferedWriter.flush();
         } catch (IOException io) {
             io.printStackTrace();
         }
+        System.out.println("Data Model created successfully: "+fileName);
     }
 }

@@ -86,13 +86,28 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         columnNameWriter.write(sb.toString() + "\n");
         columnNameWriter.close();
+        //Insert Meta Table
+        Table table = new Table();
+        table.setRow(new String[]{QueryConstants.CURRENT_DB,tableName,"0"});
+        metadataServices.insertTableDetailsTable(table);
+
+        //Insert Meta Columns
+        table = new Table();
+        for (Column column:columns) {
+            table.setRow(new String[]{
+                    tableName,
+                    column.getColumnName(),
+                    column.getDatatype().toString(),
+                    column.getConstraints() == null ? "" : String.join(",", column.getConstraints())});
+        }
+        metadataServices.insertColumnDetailsTable(table);
         Utility.displayMessage("Created");
         return new DatabaseResponse(true,"Created "+tableName);
     }
 
     @Override
     public DatabaseResponse insertTable(String tableName, Table tableDate) throws IOException, DatabaseException {
-        if(validationServices.validateInsertData(tableName, tableDate)){
+        if(!validationServices.validateInsertData(tableName, tableDate)){
             Utility.displayMessage("Table Constraint Failure");
             return new DatabaseResponse(false,"Table Constraint Failure");
         }
@@ -132,7 +147,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse selectTable(String tableName, String columns, WhereCondition whereCondition) throws IOException, DatabaseException {
-        if(validationServices.validateWhereCondition(tableName, whereCondition)){
+        if(!validationServices.validateWhereCondition(tableName, whereCondition)){
             Utility.displayMessage("WhereCondition Constraint Failure");
             return new DatabaseResponse(false,"WhereCondition Constraint Failure");
         }
@@ -433,11 +448,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse updateTable(String tableName, String column, String value, WhereCondition whereCondition) throws IOException, DatabaseException {
-        if(validationServices.validateWhereCondition(tableName, whereCondition)){
+        if(!validationServices.validateWhereCondition(tableName, whereCondition)){
             Utility.displayMessage("WhereCondition Constraint Failure");
             return new DatabaseResponse(false,"WhereCondition Constraint Failure");
         }
-        if(validationServices.validateWhereCondition(tableName, new WhereCondition(column, value))){
+        if(!validationServices.validateWhereCondition(tableName, new WhereCondition(column, value))){
             Utility.displayMessage("Datatype Constraint Failure");
             return new DatabaseResponse(false,"Datatype Constraint Failure");
         }
@@ -576,7 +591,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
         if(checkLock()) {
             QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
         }
-        if(validationServices.validateWhereCondition(tableName, whereCondition)) {
+        if(!validationServices.validateWhereCondition(tableName, whereCondition)) {
             Utility.displayMessage("WhereCondition Constraint Failure");
             return new DatabaseResponse(false, "WhereCondition Constraint Failure");
         }
@@ -636,6 +651,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
                 return new DatabaseResponse(true, tableName + " has been deleted successfully");
             }
         }
+        metadataServices.dropTable(tableName);
         return new DatabaseResponse(false, tableName + " Error deleting");
     }
 

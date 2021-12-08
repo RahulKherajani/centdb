@@ -36,4 +36,13 @@ public class WhereCondition {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "WhereCondition{" +
+                "column='" + column + '\'' +
+                ", operation=" + operation +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
