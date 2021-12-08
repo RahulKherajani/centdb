@@ -77,17 +77,16 @@ public class Main {
         obj.beginTransaction();
 
         //update table
-//        WhereCondition whereCondition = new WhereCondition();
-//        whereCondition.setColumn("id");
-//        whereCondition.setValue("99");
-//        whereCondition.setOperation(Operation.GREATER_THAN);
-//        obj.updateTable("users", "name", "greatest", whereCondition);
+        WhereCondition whereCondition = new WhereCondition();
+        whereCondition.setColumn("id");
+        whereCondition.setValue("99");
+        whereCondition.setOperation(Operation.GREATER_THAN);
+        obj.updateTable("users", "name", "greatest", whereCondition);
         ///////////////
 
         //delete table
-        WhereCondition whereCondition = new WhereCondition();
         whereCondition.setColumn("name");
-        whereCondition.setValue("rs");
+        whereCondition.setValue("shami");
         whereCondition.setOperation(Operation.EQUALS);
         obj.deleteTable("users", whereCondition);
         ///////////////

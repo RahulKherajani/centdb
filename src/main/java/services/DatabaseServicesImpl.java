@@ -445,6 +445,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
         // to check column index
         String columnIndex = updateReader.readLine();
+        boolean isColumnNameWritten = false;
         int columnIndexCounter = 0;
         int columnCounter = 0;
         int columnIndexCounter2 = 0;
@@ -489,6 +490,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
                     }
                     System.out.println(updateFileLineReader);
                 }
+
+                if (!isColumnNameWritten) {
+                    updateWriter.write(columnIndex + "\n");
+                    isColumnNameWritten = true;
+                }
                 updateWriter.write(updateFileLineReader + "\n");
             }
         } else if (whereCondition.getOperation().equals(Operation.LESS_THAN)) {
@@ -505,6 +511,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
                     }
                     System.out.println(updateFileLineReader);
                 }
+                if (!isColumnNameWritten) {
+                    updateWriter.write(columnIndex + "\n");
+                    isColumnNameWritten = true;
+                }
                 updateWriter.write(updateFileLineReader + "\n");
             }
         } else {
@@ -520,6 +530,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
                         System.out.println(rename);
                     }
                     System.out.println(updateFileLineReader);
+                }
+                if (!isColumnNameWritten) {
+                    updateWriter.write(columnIndex + "\n");
+                    isColumnNameWritten = true;
                 }
                 updateWriter.write(updateFileLineReader + "\n");
             }

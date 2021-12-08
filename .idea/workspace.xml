@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5af2e7d5-2761-416d-b9f5-9641cf0c229c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DatabaseCollections/seven/users.tsv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DatabaseCollections/test2/users.tsv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TransactionDatabase/test2/users.tsv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TransactionDatabase/meta-info/column_details.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TransactionDatabase/meta-info/table_details.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/MetadataServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/MetadataServices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/MetadataServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/MetadataServicesImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
