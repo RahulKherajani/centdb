@@ -181,13 +181,14 @@ public class MetadataServicesImpl implements MetadataServices {
     @Override
     public DatabaseResponse dropTable(String tableName) {
         File columnDetailsTable = new File(DB_PATH + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
-        if (columnDetailsTable.isFile()) {
+        if (!columnDetailsTable.isFile()) {
             return new DatabaseResponse(false, "Meta file not found. Create meta first");
         }
         StringBuilder finalValues = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(columnDetailsTable))) {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
+                System.out.println(temp);
                 String[] tempArr = temp.split(DELIMITER);
                 if (!tempArr[0].equalsIgnoreCase(tableName)) {
                     finalValues.append(temp).append(EOL);
@@ -197,8 +198,43 @@ public class MetadataServicesImpl implements MetadataServices {
             e.printStackTrace();
             return new DatabaseResponse(false, "Table entry failed");
         }
+        try(PrintWriter writer = new PrintWriter(columnDetailsTable)){
+            writer.print("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(columnDetailsTable))) {
             bufferedWriter.write(finalValues.toString());
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        if (!tableDetails.isFile()) {
+            return new DatabaseResponse(false, "Meta file not found. Create meta first");
+        }
+        StringBuilder finalValuesTable = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tableDetails))) {
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                System.out.println(temp);
+                String[] tempArr = temp.split(DELIMITER);
+                if (!tempArr[1].equalsIgnoreCase(tableName)) {
+                    finalValuesTable.append(temp).append(EOL);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new DatabaseResponse(false, "Table entry failed");
+        }
+        try(PrintWriter writer = new PrintWriter(tableDetails)){
+            writer.print("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tableDetails))) {
+            bufferedWriter.write(finalValuesTable.toString());
             bufferedWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
