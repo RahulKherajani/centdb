@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class EventLogWriter {
 
-	public void addEventLog(String message) {
+	public static void addEventLog(String message) {
 
 		String EVENT_LOG_FILE = "./src/main/resources/logs/event_logs.txt";
 
@@ -28,7 +28,7 @@ public class EventLogWriter {
 		}
 	}
 
-	private void addLog(String message, File file) {
+	private static void addLog(String message, File file) {
 
 		try (FileWriter writer = new FileWriter(file,true)) {
 

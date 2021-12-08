@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class AnalyticsWriter {
 	
-	public void addAnalyticsLog(String user, String message) {
+	public static void addAnalyticsLog(String user, String message) {
 
 		String ANALYTICS_LOG_FILE = "./src/main/resources/logs/analytics_logs.txt";
 
@@ -27,7 +27,7 @@ public class AnalyticsWriter {
 		}
 	}
 
-	private void addLog(String user, String message, File file) {
+	private static void addLog(String user, String message, File file) {
 
 		try (FileWriter writer = new FileWriter(file, true)) {
 

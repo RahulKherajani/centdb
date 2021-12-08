@@ -23,12 +23,11 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
 	public static void main(String[] args) throws IOException, ParseException, NoSuchAlgorithmException {
-//        UserMenuDriver driver = new UserMenuDriver();
-//
-//        GeneralLogWriter gen = new GeneralLogWriter();
+        UserMenuDriver driver = new UserMenuDriver();
+
 //        Runnable helloRunnable = new Runnable() {
 //            public void run() {
-//                gen.addMetadata();
+//            	GeneralLogWriter.addMetadata();
 //            }
 //        };
 //
@@ -37,7 +36,7 @@ public class Main {
 //
 //        driver.showForm();
 //        executor.shutdown();
-//
+
         transcation();
     }
 

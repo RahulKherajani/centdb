@@ -18,8 +18,6 @@ public class AnalyticsQueryProcessor {
 
 	private static List<QueryLogResponse> queryLogResponse = new ArrayList<QueryLogResponse>();
 
-	private static AnalyticsWriter analyticsWriter = new AnalyticsWriter();
-
 	private static String loggedInUser = QueryConstants.CURRENT_USER;
 	
 	private MetadataServices metaServices = new MetadataServicesImpl();
@@ -45,7 +43,7 @@ public class AnalyticsQueryProcessor {
 
 				String user = modifiedFields.get(1);
 
-				if (user.equalsIgnoreCase(loggedInUser)) { // needs to come from the current user
+				if (user.equalsIgnoreCase(loggedInUser)) {
 
 					String status = modifiedFields.get(2);
 					String database = modifiedFields.get(4);
@@ -86,7 +84,7 @@ public class AnalyticsQueryProcessor {
 		String result = "User " + loggedInUser + " submitted " + response.size() + " queries on " + database;
 		System.out.println(result);
 		String message = "Query:" + query + ";" + "~" + "Result:" + result+"!";
-		analyticsWriter.addAnalyticsLog(loggedInUser, message);
+		AnalyticsWriter.addAnalyticsLog(loggedInUser, message);
 
 	}
 
@@ -103,7 +101,7 @@ public class AnalyticsQueryProcessor {
 				+ database;
 		System.out.println(result);
 		String message = "Query:" + query + ";" + "~" + "Result:" + result+"!";
-		analyticsWriter.addAnalyticsLog(loggedInUser, message);
+		AnalyticsWriter.addAnalyticsLog(loggedInUser, message);
 	}
 
 	public void processCountQueriesByOperation(String query) {
@@ -130,7 +128,7 @@ public class AnalyticsQueryProcessor {
 			System.out.println(result);
 			message += result + "!";
 		}
-		analyticsWriter.addAnalyticsLog(loggedInUser, message);
+		AnalyticsWriter.addAnalyticsLog(loggedInUser, message);
 	}
 
 //	public static void main(String[] args) {

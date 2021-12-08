@@ -28,3 +28,8 @@ TimeStamp:2021-12-07 15:57:03.46~User:rahul~Query:count queries db1;~Result:User
 TimeStamp:2021-12-07 15:57:15.574~User:rahul~Query:count update queries db1;~User rahul performed 0 update queries on employee in db1!User rahul performed 0 update queries on department in db1!
 TimeStamp:2021-12-07 15:58:46.86~User:rahul~Query:count queries db1;~Result:User rahul submitted 4 queries on db1!
 TimeStamp:2021-12-07 15:58:56.332~User:rahul~Query:count update queries db1;~User rahul performed 0 update queries on employeedetails in db1!User rahul performed 0 update queries on departmentdetails in db1!User rahul performed 0 update queries on facilitiesdetails in db1!
+TimeStamp:2021-12-07 20:55:34.935~User:rahul~Query:count queries db1;~Result:User rahul submitted 4 queries on db1!
+TimeStamp:2021-12-08 11:36:59.851~User:rahul~Query:count queries db1;~Result:User rahul submitted 4 queries on db1!
+TimeStamp:2021-12-08 11:37:19.527~User:rahul~Query:count valid queries db1;~Result:User rahul submitted 4 valid queries on db1!
+TimeStamp:2021-12-08 11:37:36.557~User:rahul~Query:count update queries db1;~User rahul performed 0 update queries on employeedetails in db1!User rahul performed 0 update queries on departmentdetails in db1!User rahul performed 0 update queries on facilitiesdetails in db1!
+TimeStamp:2021-12-08 11:38:14.692~User:rahul~Query:count update queries testdb;~User rahul performed 0 update queries on user in testdb!User rahul performed 0 update queries on test in testdb!

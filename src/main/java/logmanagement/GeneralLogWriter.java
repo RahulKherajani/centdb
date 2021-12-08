@@ -13,7 +13,7 @@ import services.MetadataServicesImpl;
 
 public class GeneralLogWriter {
 
-	private void addGeneralLog(String message) {
+	private static void addGeneralLog(String message) {
 
 		String GENERAL_LOG_FILE = "./src/main/resources/logs/general_logs.txt";
 
@@ -34,7 +34,7 @@ public class GeneralLogWriter {
 		}
 	}
 
-	private void addLog(String message, File file) {
+	private static void addLog(String message, File file) {
 
 		try (FileWriter writer = new FileWriter(file,true)) {
 
@@ -51,7 +51,7 @@ public class GeneralLogWriter {
 
 	}
 	
-	public void addMetadata() {
+	public static void addMetadata() {
 		MetadataServices meta = new MetadataServicesImpl();	
 		List<String> databases = new ArrayList<String>();
 		String message = "";

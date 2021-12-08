@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class QueryLogWriter {
 	
-	public void addQueryLog(String message) {
+	public static void addQueryLog(String message) {
 		
 		String QUERY_LOG_FILE = "./src/main/resources/logs/query_logs.txt";
 		
@@ -28,7 +28,7 @@ public class QueryLogWriter {
 		}	
 	}
 	
-	private void addLog(String message, File file) {
+	private static void addLog(String message, File file) {
 		
 		try (FileWriter writer = new FileWriter(file,true)) {
 		
@@ -40,15 +40,9 @@ public class QueryLogWriter {
 			writer.append(message);
 			writer.append("\n");
 		}
-//			writer.append(BackendSession.getLoggedInUser().getUserName());
 		
 		catch (final IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		QueryLogWriter querylog = new QueryLogWriter();
-		querylog.addQueryLog("Hello");
 	}
 }
