@@ -4,10 +4,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.DatabaseException;
+import services.MetadataServices;
+import services.MetadataServicesImpl;
 
 public class GeneralLogWriter {
 
-	public void addGeneralLog(String message) {
+	private void addGeneralLog(String message) {
 
 		String GENERAL_LOG_FILE = "./src/main/resources/logs/general_logs.txt";
 
@@ -35,8 +41,6 @@ public class GeneralLogWriter {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			writer.append("TimeStamp:" + timestamp.toString());
 			writer.append("~");
-			writer.append("User:");
-			writer.append("~");
 			writer.append(message);
 			writer.append("\n");
 		}
@@ -45,5 +49,27 @@ public class GeneralLogWriter {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void addMetadata() {
+		MetadataServices meta = new MetadataServicesImpl();	
+		List<String> databases = new ArrayList<String>();
+		String message = "";
+		try {
+			databases = meta.getDatabases();
+			for (String database:databases) {
+				message+="DatabaseName:"+database+"|";
+				List<String> tables = new ArrayList<String>();
+				tables = meta.getTables(database);
+				message+="NoOfTables:"+tables.size()+"|Tables:{";
+				message+= String.join(",", tables);
+				message+="}~";
+			}
+			
+		addGeneralLog(message);
+		
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
 	}
 }

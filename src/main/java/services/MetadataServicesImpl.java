@@ -60,9 +60,8 @@ public class MetadataServicesImpl implements MetadataServices {
             String temp;
             int i =0;
             while ((temp = bufferedReader.readLine()) != null) {
-                if(i==0)continue;
-                i++;
-                databases.add(temp.split(DELIMITER)[1]);
+                if(i++==0)continue;
+                databases.add(temp.split(DELIMITER)[0]);
             }
         } catch (IOException e) {
             e.printStackTrace();
