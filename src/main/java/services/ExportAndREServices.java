@@ -2,8 +2,7 @@ package services;
 
 import exceptions.DatabaseException;
 
-import java.io.IOException;
-
 public interface ExportAndREServices {
-    void exportStructure(String fileName) throws DatabaseException, IOException;
+    void exportStructure(String fileName) throws DatabaseException;
+    void reverseEngineering(String fileName) throws DatabaseException;
 }
