@@ -38,8 +38,8 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
                     else if(words[1].equalsIgnoreCase("table")){
 
-                        String outerCreateQuery = "CREATE\\sTABLE\\s(\\w+)\\s";
-                        String innerCreateQuery = "\\(((?:\\s*\\w+\\s+\\w+\\(?[0-9]*\\)?,?)+)\\);";
+                        String outerCreateQuery = "create\\stable\\s(\\w+)\\s";
+                        String innerCreateQuery = "\\(((?:\\s*\\w+\\s+\\w+\\(?[0-9]*\\)?,?)+)\\)";
                         Pattern pattern1 = Pattern.compile(outerCreateQuery + innerCreateQuery);
                         Matcher matcher1 = pattern1.matcher(query);
                         List<Column> columnList=new ArrayList();
@@ -59,7 +59,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                                 String temp = column.substring(column.indexOf(' ')).trim();
                                 System.out.println(temp);
                                 String dataType = temp.indexOf(' ') == -1 ? temp : temp.substring(0, temp.indexOf(' '));
-                                columnObject.setDatatype(Datatype.valueOf(dataType));
+                                columnObject.setDatatype(Datatype.valueOf(dataType.toUpperCase(Locale.ROOT)));
 
                                 if(temp.indexOf(' ')!=-1) {
                                     String constraint = temp.substring(temp.indexOf(' '));
