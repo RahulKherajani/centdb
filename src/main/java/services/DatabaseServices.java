@@ -25,4 +25,9 @@ public interface DatabaseServices {
     DatabaseResponse deleteTable(String tableName, WhereCondition whereCondition) throws IOException;
 
     DatabaseResponse dropTable(String tableName);
+
+    DatabaseResponse beginTransaction() throws IOException;
+
+    DatabaseResponse endTransaction(String transactionEndKeyword) throws IOException;
+
 }

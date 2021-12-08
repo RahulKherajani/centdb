@@ -40,8 +40,8 @@ class MetadataServicesTest {
     @Test
     void insertTableDetailsTable() {
         Table table = new Table();
-        table.setRow(new String[]{"testDb","user"});
-        table.setRow(new String[]{"testDb","test"});
+        table.setRow(new String[]{"testDb","user","0"});
+        table.setRow(new String[]{"testDb","test","0"});
         metadataServices.insertTableDetailsTable(table);
     }
 
