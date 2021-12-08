@@ -1,6 +1,7 @@
 package services;
 
 import exceptions.DatabaseException;
+import logmanagement.EventLogWriter;
 import model.Column;
 import model.Table;
 
@@ -82,12 +83,22 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                 //UNLOCK
                 bufferedWriter.append("UNLOCK TABLES;\n");
                 System.out.println("UNLOCK TABLES;\n");
+                
+            	//Event Logs
+                String eventLogMessage = "Dump creation successful for database:"+dbName;
+                EventLogWriter.addEventLog(eventLogMessage);
+                
+                System.out.println("Dump created successfully: "+fileName);
             }
             bufferedWriter.flush();
         } catch (IOException io) {
+        	
+        	//Event Logs
+            String eventLogMessage = "Dump creation unsuccessful for database:"+dbName;
+            EventLogWriter.addEventLog(eventLogMessage);
+            
             io.printStackTrace();
         }
-        System.out.println("Dump created successfully: "+fileName);
     }
 
     @Override
@@ -160,9 +171,22 @@ public class ExportAndREServicesImpl implements ExportAndREServices {
                 System.out.println("____________________________________________________________________________________________________________\n");
             }
             bufferedWriter.flush();
+            
+        	//Event Logs
+            String eventLogMessage = "Data Model creation successful for database:"+dbName;
+            EventLogWriter.addEventLog(eventLogMessage);
+            
+            System.out.println("Data Model created successfully: "+fileName);
+            
+            
         } catch (IOException io) {
+        	
+        	//Event Logs
+            String eventLogMessage = "Data Model creation unsuccessful for database:"+dbName;
+            EventLogWriter.addEventLog(eventLogMessage);
+            
             io.printStackTrace();
         }
-        System.out.println("Data Model created successfully: "+fileName);
+        
     }
 }

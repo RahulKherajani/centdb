@@ -2,8 +2,10 @@ package services;
 
 import Constants.Datatype;
 import Constants.Operation;
+import Constants.QueryConstants;
 import Utility.Utility;
 import exceptions.DatabaseException;
+import logmanagement.QueryLogWriter;
 import model.Column;
 import model.DatabaseResponse;
 import model.Table;
@@ -74,9 +76,21 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                             if(!databaseResponse.isSuccess()){
                                 System.out.println("ERROR: "+databaseResponse.getMsg());
                             }
+                            else {
+                                
+                            	//Query Logs
+                                String queryLogMessage = "Status:Valid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB+"~Table:"+tableName+"~Operation:CREATE";
+                                QueryLogWriter.addQueryLog(queryLogMessage);
+                                
+                            }
 
                         }
                         else{
+                        	
+                        	//Query Logs
+                            String queryLogMessage = "Status:Invalid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB;
+                            QueryLogWriter.addQueryLog(queryLogMessage);
+                            
                             System.out.println("Invalid query !!");
                         }
                     }
@@ -95,27 +109,49 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                     Pattern pattern2 = Pattern.compile("insert into\\s(.*?)\\s(.*?)\\svalues\\s(.*?);", Pattern.DOTALL);
                     Matcher matcher2 = pattern2.matcher(query);
                     matcher2.find();
+                    if(matcher2.matches()) {
+                    	String table = matcher2.group(1);
+                        String[] columns = matcher2.group(2)
+                                .replaceAll("[\\[\\](){}]","")
+                                .replace(" ","")
+                                .split(",");
+                        String[] rows = matcher2.group(3)
+                                .replaceAll("[\\[\\](){}]","")
+                                .replace(" ","")
+                                .replace("'","")
+                                .replace("\"","")
+                                .split(",");
 
-                    String table = matcher2.group(1);
-                    String[] columns = matcher2.group(2)
-                            .replaceAll("[\\[\\](){}]","")
-                            .replace(" ","")
-                            .split(",");
-                    String[] rows = matcher2.group(3)
-                            .replaceAll("[\\[\\](){}]","")
-                            .replace(" ","")
-                            .replace("'","")
-                            .replace("\"","")
-                            .split(",");
+                        ArrayList<String[]> rowValues = new ArrayList<>();
+                        rowValues.add(rows);
 
-                    ArrayList<String[]> rowValues = new ArrayList<>();
-                    rowValues.add(rows);
+                        Table table1 = new Table();
+                        table1.setColumns(columns);
+                        table1.setRows(rowValues);
 
-                    Table table1 = new Table();
-                    table1.setColumns(columns);
-                    table1.setRows(rowValues);
-
-                    db.insertTable(table,table1);
+                        DatabaseResponse databaseResponse = db.insertTable(table,table1);
+                        if(!databaseResponse.isSuccess()){
+                            System.out.println("ERROR: "+databaseResponse.getMsg());
+                        }
+                        else {
+                        	
+                        	//Query Logs
+                            String queryLogMessage = "Status:Valid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB+"~Table:"+table+"~Operation:INSERT";
+                            QueryLogWriter.addQueryLog(queryLogMessage);
+                            
+                        }
+                
+                    }
+                    else {
+                    	
+                    	//Query Logs
+                        String queryLogMessage = "Status:Invalid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB;
+                        QueryLogWriter.addQueryLog(queryLogMessage);
+                        
+                        System.out.println("Invalid query !!");
+                        
+                    }
+                    
                     break;
 
                case "select":
@@ -142,11 +178,27 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                             whereCondition.setValue(condition[2].replaceAll("\'", ""));
                         }
                         DatabaseResponse databaseResponse = db.selectTable(tableName,columnName,whereCondition);
+                        if(!databaseResponse.isSuccess()){
+                            System.out.println("ERROR: "+databaseResponse.getMsg());
+                        }
+                        else {
+                        	
+                        	//Query Logs
+                            String queryLogMessage = "Status:Valid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB+"~Table:"+tableName+"~Operation:SELECT";
+                            QueryLogWriter.addQueryLog(queryLogMessage);
+                            
+                        }
 
                     }
                     else {
+                    	
+                    	//Query Logs
+                        String queryLogMessage = "Status:Invalid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB;
+                        QueryLogWriter.addQueryLog(queryLogMessage);
+                        
                         System.out.println("Invalid query !!");
                     }
+                    
                     break;
 
                 case "update":
@@ -172,8 +224,20 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         if(!databaseResponse.isSuccess()){
                             System.out.println("ERROR: "+databaseResponse.getMsg());
                         }
+                        else {
+                        	
+                        	//Query Logs
+                            String queryLogMessage = "Status:Valid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB+"~Table:"+tableName+"~Operation:UPDATE";
+                            QueryLogWriter.addQueryLog(queryLogMessage);
+                            
+                        }
                     }
                     else {
+                    	
+                    	//Query Logs
+                        String queryLogMessage = "Status:Invalid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB;
+                        QueryLogWriter.addQueryLog(queryLogMessage);
+
                         System.out.println("Invalid query !!");
                     }
                     break;
@@ -196,9 +260,26 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         whereCondition.setOperation(getOperation(condition[1]));
                         whereCondition.setValue(condition[2].replaceAll("\'",""));
 
-                        db.deleteTable(tableName,whereCondition);
+                        
+                        
+                        DatabaseResponse databaseResponse = db.deleteTable(tableName,whereCondition);
+                        if(!databaseResponse.isSuccess()){
+                            System.out.println("ERROR: "+databaseResponse.getMsg());
+                        }
+                        else {
+                        	
+                        	//Query Logs
+                            String queryLogMessage = "Status:Valid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB+"~Table:"+tableName+"~Operation:DELETE";
+                            QueryLogWriter.addQueryLog(queryLogMessage);
+                            
+                        }
                     }
                     else {
+                    	
+                    	//Query Logs
+                        String queryLogMessage = "Status:Invalid~Query:"+query+"~Database:"+QueryConstants.CURRENT_DB;
+                        QueryLogWriter.addQueryLog(queryLogMessage);
+                        
                         System.out.println("Invalid query !!");
                     }
                     break;
@@ -214,6 +295,11 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         db.dropTable(tableName);
                     }
                     else {
+                    	
+                    	//Query Logs
+                        String queryLogMessage = "Status:Invalid~Query:"+query+"Database:"+QueryConstants.CURRENT_DB;
+                        QueryLogWriter.addQueryLog(queryLogMessage);
+                        
                         System.out.println("Invalid query");
                     }
                     break;

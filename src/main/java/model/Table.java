@@ -17,7 +17,7 @@ public class Table {
     }
 
     public ArrayList<String[]> getRows() {
-        if(rows.isEmpty()){
+        if(rows == null || rows.isEmpty()){
             rows = new ArrayList<>();
         }
         return rows;

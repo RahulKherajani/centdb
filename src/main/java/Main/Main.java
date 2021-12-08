@@ -36,11 +36,11 @@ public class Main {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(helloRunnable, 0, 60, TimeUnit.SECONDS);
 
-//        driver.showForm();
-        new QueryParsingServicesImpl().receiveQuery();
+        driver.showForm();
         executor.shutdown();
-
-//        transcation();
+        
+        //new QueryParsingServicesImpl().receiveQuery();
+        //transcation();
     }
 
     public static void transcation () throws IOException, DatabaseException {
