@@ -107,6 +107,9 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse insertTable(String tableName, Table tableDate) throws IOException, DatabaseException {
+        if(checkLock()) {
+            QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
+        }
         if(!validationServices.validateInsertData(tableName, tableDate)){
             Utility.displayMessage("Table Constraint Failure");
             return new DatabaseResponse(false,"Table Constraint Failure");
@@ -147,6 +150,9 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse selectTable(String tableName, String columns, WhereCondition whereCondition) throws IOException, DatabaseException {
+        if(checkLock()) {
+            QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
+        }
         if(!validationServices.validateWhereCondition(tableName, whereCondition)){
             Utility.displayMessage("WhereCondition Constraint Failure");
             return new DatabaseResponse(false,"WhereCondition Constraint Failure");
@@ -657,6 +663,9 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse beginTransaction() throws IOException {
+        if(QueryConstants.CURRENT_DB=="") {
+            return new DatabaseResponse(false, "Please Select the database");
+        }
         File srcDir = new File(QueryConstants.DB_PATH+QueryConstants.CURRENT_DB);
         File destDir = new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB);
         FileUtils.copyDirectory(srcDir, destDir);
@@ -668,16 +677,17 @@ public class DatabaseServicesImpl implements DatabaseServices{
     public DatabaseResponse endTransaction(String transactionEndKeyword) throws IOException {
         if(transactionEndKeyword.equalsIgnoreCase("COMMIT")) {
             QueryConstants.DB_PATH = QueryConstants.DB_PATH_PERMANENT;
-            System.out.println("Current db"+QueryConstants.CURRENT_DB);
             File srcDir = new File( QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB);
             File destDir = new File(QueryConstants.DB_PATH+QueryConstants.CURRENT_DB+"/");
             FileUtils.copyDirectory(srcDir, destDir);
+            FileUtils.deleteDirectory(new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB));
         }else if(transactionEndKeyword.equalsIgnoreCase("ROLLBACK")){
             FileUtils.deleteDirectory(new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB));
         }
         lock -= 1;
         return new DatabaseResponse(true, "TRANSACTION ENDED");
     }
+
 
     private boolean checkLock(){
         if(lock==0) {
