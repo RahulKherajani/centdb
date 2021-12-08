@@ -130,17 +130,4 @@ public class AnalyticsQueryProcessor {
 		}
 		AnalyticsWriter.addAnalyticsLog(loggedInUser, message);
 	}
-
-//	public static void main(String[] args) {
-//
-//		AnalyticsQueryProcessor ana = new AnalyticsQueryProcessor();
-//
-//		ana.processCountQueries("count queries db1;");
-//
-//		// List<QueryLogResponse> queryLogResponse1 =
-//		// queryLogResponse.stream().filter().collect(Collectors.toList());
-//
-//		// System.out.println(queryLogResponse1.size());
-//
-//	}
 }

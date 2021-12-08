@@ -5,8 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Timestamp;
 
+import Constants.QueryConstants;
+
 public class EventLogWriter {
 
+	private static String loggedInUser = QueryConstants.CURRENT_USER;
+	
 	public static void addEventLog(String message) {
 
 		String EVENT_LOG_FILE = "./src/main/resources/logs/event_logs.txt";
@@ -35,7 +39,7 @@ public class EventLogWriter {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			writer.append("TimeStamp:" + timestamp.toString());
 			writer.append("~");
-			writer.append("User:");
+			writer.append("User:"+loggedInUser);
 			writer.append("~");
 			writer.append(message);
 			writer.append("\n");

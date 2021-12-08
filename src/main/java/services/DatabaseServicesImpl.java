@@ -4,6 +4,7 @@ import Constants.Operation;
 import Constants.QueryConstants;
 import Utility.Utility;
 import exceptions.DatabaseException;
+import logmanagement.EventLogWriter;
 import model.Column;
 import model.DatabaseResponse;
 import model.Table;
@@ -38,6 +39,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         boolean  isCreated = file.mkdir();
         Utility.displayMessage("Database created successfully");
+        
+    	//Event Logs
+        String eventLogMessage = "Database:"+dbName+" created";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
         return new DatabaseResponse(isCreated,"Database created successfully");
     }
 
@@ -48,7 +54,13 @@ public class DatabaseServicesImpl implements DatabaseServices{
             QueryConstants.CURRENT_DB = dbName;
             Utility.displayMessage("Selected the database");
             System.out.println();
+        	
+            //Event Logs
+            String eventLogMessage = "Database:"+dbName+" selected";
+            EventLogWriter.addEventLog(eventLogMessage);
+            
             return new DatabaseResponse(true,"Selected the database"+dbName);
+            
         } else {
             Utility.displayMessage("Database does not exist");
             return new DatabaseResponse(false,"Database does not exist");
@@ -75,6 +87,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
             isCreated = file.createNewFile();
 
         } catch (IOException e) {
+        	
+        	//Event Logs
+            String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" creation failed.";
+            EventLogWriter.addEventLog(eventLogMessage);
+            
             e.printStackTrace();
         }
 
@@ -102,6 +119,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         metadataServices.insertColumnDetailsTable(table);
         Utility.displayMessage("Created");
+        
+    	//Event Logs
+        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" Created";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
         return new DatabaseResponse(true,"Created "+tableName);
     }
 
@@ -140,6 +162,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
         columnNameWriter.write(insertValuesStringBuilder.toString());
         columnNameWriter.close();
         Utility.displayMessage("Inserted successfully");
+        
+    	//Event Logs
+        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" updated";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
         return new DatabaseResponse(true,"Inserted successfully"+tableName);
     }
 
@@ -588,8 +615,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
         file.delete();
         createTempFile.renameTo(file);
 
-
-        return new DatabaseResponse(true,"Selected successfully"+tableName);
+    	//Event Logs
+        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" updated";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
+        return new DatabaseResponse(true,"Updated successfully"+tableName);
     }
 
     @Override
@@ -638,7 +668,12 @@ public class DatabaseServicesImpl implements DatabaseServices{
         createTempDeleteFile.renameTo(file);
 
         Utility.displayMessage("Deleted row");
-        return new DatabaseResponse(true,"Inserted successfully"+tableName);
+        
+    	//Event Logs
+        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" updated";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
+        return new DatabaseResponse(true,"Deleted successfully from "+tableName);
     }
 
     @Override
@@ -654,6 +689,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
             if (success) {
                 Utility.displayMessage("success");
+                
+            	//Event Logs
+                String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" dropped";
+                EventLogWriter.addEventLog(eventLogMessage);
+                
                 return new DatabaseResponse(true, tableName + " has been deleted successfully");
             }
         }
@@ -670,6 +710,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
         File destDir = new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB);
         FileUtils.copyDirectory(srcDir, destDir);
         lock += 1;
+        
+    	//Event Logs
+        String eventLogMessage = "Transaction Started";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
         return new DatabaseResponse(true, "TRANSACTION STARTED");
     }
 
@@ -685,6 +730,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
             FileUtils.deleteDirectory(new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB));
         }
         lock -= 1;
+        
+    	//Event Logs
+        String eventLogMessage = "Transaction Ended";
+        EventLogWriter.addEventLog(eventLogMessage);
+        
         return new DatabaseResponse(true, "TRANSACTION ENDED");
     }
 
@@ -695,6 +745,4 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         return true;
     }
-
-
 }

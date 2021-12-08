@@ -19,6 +19,10 @@ public class AnalyticsQueryParser {
 	private String COUNT_DELETE_QUERIES_SYNTAX = "^(count\\sdelete\\squeries\\s[a-zA-Z\\d]+;)$";
 	private String COUNT_SELECT_QUERIES_KEYWORD = "count select queries";
 	private String COUNT_SELECT_QUERIES_SYNTAX = "^(count\\sselect\\squeries\\s[a-zA-Z\\d]+;)$";
+	private String COUNT_CREATE_QUERIES_KEYWORD = "count create queries";
+	private String COUNT_CREATE_QUERIES_SYNTAX = "^(count\\screate\\squeries\\s[a-zA-Z\\d]+;)$";
+	private String COUNT_INSERT_QUERIES_KEYWORD = "count insert queries";
+	private String COUNT_INSERT_QUERIES_SYNTAX = "^(count\\sinsert\\squeries\\s[a-zA-Z\\d]+;)$";
 	
 	private AnalyticsQueryProcessor analyticsQueryProcessor= new AnalyticsQueryProcessor();
 	
@@ -83,6 +87,24 @@ public class AnalyticsQueryParser {
 		       boolean isCountDeleteQueriesSyntaxCorrect = Pattern.matches(COUNT_SELECT_QUERIES_SYNTAX, queryLowerCase);
 		      if (!isCountDeleteQueriesSyntaxCorrect) {
 		    	  System.out.println("Invalid count select queries syntax!");
+		      }
+		      else {
+		    	  analyticsQueryProcessor.processCountQueriesByOperation(queryLowerCase);
+		      }
+		    }
+	    else if (queryLowerCase.contains(COUNT_CREATE_QUERIES_KEYWORD)) {
+		       boolean isCountDeleteQueriesSyntaxCorrect = Pattern.matches(COUNT_CREATE_QUERIES_SYNTAX, queryLowerCase);
+		      if (!isCountDeleteQueriesSyntaxCorrect) {
+		    	  System.out.println("Invalid count create queries syntax!");
+		      }
+		      else {
+		    	  analyticsQueryProcessor.processCountQueriesByOperation(queryLowerCase);
+		      }
+		    }
+	    else if (queryLowerCase.contains(COUNT_INSERT_QUERIES_KEYWORD)) {
+		       boolean isCountDeleteQueriesSyntaxCorrect = Pattern.matches(COUNT_INSERT_QUERIES_SYNTAX, queryLowerCase);
+		      if (!isCountDeleteQueriesSyntaxCorrect) {
+		    	  System.out.println("Invalid count insert queries syntax!");
 		      }
 		      else {
 		    	  analyticsQueryProcessor.processCountQueriesByOperation(queryLowerCase);
