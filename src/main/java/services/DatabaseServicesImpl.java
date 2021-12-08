@@ -426,7 +426,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
         File createTempFile = new File(tempTablePath);
         createTempFile.createNewFile(); // create file
 
-
         BufferedReader updateReader = new BufferedReader(new FileReader(tablePath));
         BufferedWriter updateWriter = new BufferedWriter(new FileWriter(tempTablePath));
 

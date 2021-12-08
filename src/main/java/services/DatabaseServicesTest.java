@@ -17,20 +17,37 @@ class DatabaseServicesTest {
     @org.junit.jupiter.api.Test
     void createDatabase() {
         DatabaseServices services = new DatabaseServicesImpl();
-        services.createDatabase("test");
+//        services.createDatabase("test");
+        services.createDatabase("seven");
     }
 
     @org.junit.jupiter.api.Test
     void useDatabase() {
         DatabaseServices services = new DatabaseServicesImpl();
-        services.useDatabase("test");
+//        services.useDatabase("test");
+        services.useDatabase("seven");
     }
 
     @org.junit.jupiter.api.Test
     void createTable() throws IOException {
+//        DatabaseServices services = new DatabaseServicesImpl();
+//        services.createDatabase("test");
+//        services.useDatabase("test");
+//        List<Column> list = new ArrayList<>();
+//        Column column = new Column();
+//        column.setColumnName("name");
+//        column.setDatatype(Datatype.STRING);
+//        Column column2 = new Column();
+//        column2.setColumnName("id");
+//        column2.setDatatype(Datatype.INT);
+//
+//        list.add(column);
+//        list.add(column2);
+//
+//        services.createTable("users",list);
+//
         DatabaseServices services = new DatabaseServicesImpl();
-        services.createDatabase("test");
-        services.useDatabase("test");
+        services.useDatabase("seven");
         List<Column> list = new ArrayList<>();
         Column column = new Column();
         column.setColumnName("name");
@@ -43,17 +60,31 @@ class DatabaseServicesTest {
         list.add(column2);
 
         services.createTable("users",list);
-
     }
 
     @Test
     void insertTable() throws IOException {
+//        DatabaseServicesImpl services = new DatabaseServicesImpl();
+//        services.useDatabase("test");
+//        ArrayList<String[]> list = new ArrayList<String[]>();
+//        list.add(new String[]{"shiv","101"});
+//        list.add(new String[]{"shiv2","102"});
+//        list.add(new String[]{"vignesh","112"});
+//        Table table = new Table();
+//        table.setRows(list);
+//        table.setColumnCount(2);
+//        table.setColumns(new String[]{"name","id"});
+//        services.insertTable("users", table);
+
         DatabaseServicesImpl services = new DatabaseServicesImpl();
-        services.useDatabase("test");
+        services.useDatabase("seven");
         ArrayList<String[]> list = new ArrayList<String[]>();
-        list.add(new String[]{"shiv","101"});
-        list.add(new String[]{"shiv2","102"});
-        list.add(new String[]{"vignesh","112"});
+        list.add(new String[]{"rs","101"});
+        list.add(new String[]{"vk","102"});
+        list.add(new String[]{"bhuvi","12"});
+        list.add(new String[]{"shami","71"});
+        list.add(new String[]{"cr7","142"});
+        list.add(new String[]{"mssi","60"});
         Table table = new Table();
         table.setRows(list);
         table.setColumnCount(2);
@@ -65,13 +96,13 @@ class DatabaseServicesTest {
     void selectTable() throws IOException {
         //select name from users where id = 5;
         DatabaseServices services = new DatabaseServicesImpl();
-        services.useDatabase("test");
+        services.useDatabase("seven");
         WhereCondition whereCondition = new WhereCondition();
         whereCondition.setColumn("id");
         whereCondition.setOperation(Operation.LESS_THAN);
-        whereCondition.setValue("105");
+        whereCondition.setValue("71");
 //        services.selectTable("users", "id,name", whereCondition);
-        services.selectTable("users", "name", whereCondition);
+        services.selectTable("users", "*", whereCondition);
 //        services.selectTable("users", "*", whereCondition);
 //        DatabaseServices services = new DatabaseServicesImpl();
 //        services.useDatabase("test");
@@ -97,24 +128,24 @@ class DatabaseServicesTest {
 //        services.updateTable("users", "name", "vk", whereCondition);
 
         DatabaseServices services = new DatabaseServicesImpl();
-        services.useDatabase("test");
+        services.useDatabase("seven");
         WhereCondition whereCondition = new WhereCondition();
 
         whereCondition.setColumn("id");
-        whereCondition.setValue("99");
+        whereCondition.setValue("13");
         whereCondition.setOperation(Operation.LESS_THAN);
 
-        services.updateTable("users", "name", "greatest", whereCondition);
+        services.updateTable("users", "name", "helolsj", whereCondition);
     }
 
     @org.junit.jupiter.api.Test
     void deleteTable() throws IOException {
         DatabaseServices services = new DatabaseServicesImpl();
-        services.useDatabase("test");
+        services.useDatabase("seven");
         WhereCondition whereCondition = new WhereCondition();
 
         whereCondition.setColumn("name");
-        whereCondition.setValue("vignesh");
+        whereCondition.setValue("helolsj");
         whereCondition.setOperation(Operation.EQUALS);
         services.deleteTable("users", whereCondition);
     }
