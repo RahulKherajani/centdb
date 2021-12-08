@@ -23,7 +23,7 @@ public class MetadataServicesImpl implements MetadataServices {
     @Override
     public DatabaseResponse createMeta() throws IOException {
         //Create Meta folder if not exist
-        File metaDir = new File(DB_PATH + META_DIR);
+        File metaDir = new File(DB_PATH_PERMANENT + META_DIR);
         if (!metaDir.isDirectory()) {
             boolean test = metaDir.mkdir();
         }
@@ -51,7 +51,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public List<String> getDatabases() throws DatabaseException {
-        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        File tableDetails = new File(DB_PATH_PERMANENT + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetails.isFile()) {
             throw new DatabaseException("Metafile not found");
         }
@@ -71,7 +71,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public List<String> getTables(String dbName) throws DatabaseException {
-        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        File tableDetails = new File(DB_PATH_PERMANENT + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetails.isFile()) {
             throw new DatabaseException("Metafile not found");
         }
@@ -92,7 +92,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public boolean isTableLocked(String tableName) throws DatabaseException {
-        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        File tableDetails = new File(DB_PATH_PERMANENT + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetails.isFile()) {
             throw new DatabaseException("Metafile not found");
         }
@@ -116,7 +116,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public DatabaseResponse insertTableDetailsTable(Table table) {
-        File tableDetailsTable = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        File tableDetailsTable = new File(DB_PATH_PERMANENT + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetailsTable.isFile()) {
             return new DatabaseResponse(false, "Meta file not found. Create meta first");
         }
@@ -134,7 +134,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public DatabaseResponse insertColumnDetailsTable(Table table) {
-        File columnDetailsTable = new File(DB_PATH + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
+        File columnDetailsTable = new File(DB_PATH_PERMANENT + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
         if (!columnDetailsTable.isFile()) {
             return new DatabaseResponse(false, "Meta file not found. Create meta first");
         }
@@ -152,7 +152,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public List<Column> getColumnDetailsForTable(String tableName) throws DatabaseException {
-        File columnDetailsTable = new File(DB_PATH + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
+        File columnDetailsTable = new File(DB_PATH_PERMANENT + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
         if (!columnDetailsTable.isFile()) {
             throw new DatabaseException("Metafile not found");
         }
@@ -180,7 +180,7 @@ public class MetadataServicesImpl implements MetadataServices {
 
     @Override
     public DatabaseResponse dropTable(String tableName) {
-        File columnDetailsTable = new File(DB_PATH + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
+        File columnDetailsTable = new File(DB_PATH_PERMANENT + META_DIR + SLASH + COLUMN_DETAILS_TABLE);
         if (!columnDetailsTable.isFile()) {
             return new DatabaseResponse(false, "Meta file not found. Create meta first");
         }
@@ -210,7 +210,7 @@ public class MetadataServicesImpl implements MetadataServices {
             e.printStackTrace();
         }
 
-        File tableDetails = new File(DB_PATH + META_DIR + SLASH + TABLE_DETAILS_TABLE);
+        File tableDetails = new File(DB_PATH_PERMANENT + META_DIR + SLASH + TABLE_DETAILS_TABLE);
         if (!tableDetails.isFile()) {
             return new DatabaseResponse(false, "Meta file not found. Create meta first");
         }
