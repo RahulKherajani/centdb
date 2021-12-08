@@ -8,6 +8,7 @@ public class WhereCondition {
     private String value;
 
     public WhereCondition(){}
+
     public WhereCondition(String column, String value) {
         this.column = column;
         this.value = value;

@@ -30,8 +30,8 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                case "create":
 
                    // String create_query = "CREATE TABLE Customer (COL1 char PRIMARY KEY, COL3 int FOREIGN KEY REFERENCES table col3);";
-                   String[] words = query.split(" ");
-
+                    query = query.replaceAll(";$", "");
+                    String[] words = query.split(" ");
                     if(words[1].equalsIgnoreCase("database")) {
                         db.createDatabase(words[2]);
                     }
