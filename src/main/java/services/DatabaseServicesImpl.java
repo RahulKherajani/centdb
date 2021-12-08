@@ -19,7 +19,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse createDatabase(String dbName) {
-        if(checkLock()){
+        if(checkLock()) {
             QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
         }
         String dbPath = QueryConstants.DB_PATH +dbName;
@@ -419,6 +419,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
     @Override
     public DatabaseResponse updateTable(String tableName, String column, String value, WhereCondition whereCondition) throws IOException {
 
+        if(checkLock()) {
+            QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
+        }
+
         if (QueryConstants.CURRENT_DB == "") {
             Utility.displayMessage("Please select a database");
             return new DatabaseResponse(false, "Please select a database");
@@ -532,6 +536,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse deleteTable(String tableName, WhereCondition whereCondition) throws IOException {
+        if(checkLock()) {
+            QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
+        }
+
         if(QueryConstants.CURRENT_DB=="") {
             Utility.displayMessage("Please select a database");
             return new DatabaseResponse(false,"Please select a database");
