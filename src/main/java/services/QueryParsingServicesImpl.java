@@ -51,7 +51,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                            String columnName = matcher3.group(1);
                            String tableName = matcher3.group(2);
                            String condition[] = matcher3.group(4).split(" ");
-
+                            //create
 
                        }
                     }
