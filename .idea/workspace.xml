@@ -5,8 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5af2e7d5-2761-416d-b9f5-9641cf0c229c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TransactionDatabase/meta-info/column_details.tsv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TransactionDatabase/meta-info/table_details.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/QueryParsingServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/QueryParsingServicesImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants/QueryConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Constants/Datatype.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/Datatype.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Constants/MenuConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/MenuConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Constants/Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/Operation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants/QueryConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/QueryProcessing/DatabaseOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueryProcessing/DatabaseOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User/CryptoHash.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User/CryptoHash.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User/FileOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User/FileOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User/UserMenuDriver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User/UserMenuDriver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User/UserProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User/UserProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/QueryValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/QueryValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/Utility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Column.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Column.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/DatabaseResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/DatabaseResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/WhereCondition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/WhereCondition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/DatabaseServicesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/DatabaseServicesTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/MetadataServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/MetadataServices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/MetadataServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/MetadataServicesImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +77,9 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RecentsManager">
@@ -65,7 +95,20 @@
       <recent name="services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DatabaseServicesTest.updateTable">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main.Main" />
+      <module name="DMW_G13_CENTDB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DatabaseServicesTest.createTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="dmw_g13_centdb" />
       <extension name="coverage">
@@ -130,29 +173,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseServicesTest.useDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="dmw_g13_centdb" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="services" />
-      <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
-      <option name="METHOD_NAME" value="useDatabase" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.DatabaseServicesTest.updateTable" />
         <item itemvalue="JUnit.DatabaseServicesTest.selectTable" />
         <item itemvalue="JUnit.DatabaseServicesTest.insertTable" />
         <item itemvalue="JUnit.DatabaseServicesTest.createTable" />
-        <item itemvalue="JUnit.DatabaseServicesTest.useDatabase" />
       </list>
     </recent_temporary>
   </component>
@@ -190,5 +217,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
