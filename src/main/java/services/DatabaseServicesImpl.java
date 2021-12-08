@@ -19,7 +19,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse createDatabase(String dbName) {
-        if(checkLock()){
+        if(checkLock()) {
             QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
         }
         String dbPath = QueryConstants.DB_PATH +dbName;
@@ -419,6 +419,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
     @Override
     public DatabaseResponse updateTable(String tableName, String column, String value, WhereCondition whereCondition) throws IOException {
 
+        if(checkLock()) {
+            QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
+        }
+
         if (QueryConstants.CURRENT_DB == "") {
             Utility.displayMessage("Please select a database");
             return new DatabaseResponse(false, "Please select a database");
@@ -441,6 +445,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
         // to check column index
         String columnIndex = updateReader.readLine();
+        boolean isColumnNameWritten = false;
         int columnIndexCounter = 0;
         int columnCounter = 0;
         int columnIndexCounter2 = 0;
@@ -485,6 +490,11 @@ public class DatabaseServicesImpl implements DatabaseServices{
                     }
                     System.out.println(updateFileLineReader);
                 }
+
+                if (!isColumnNameWritten) {
+                    updateWriter.write(columnIndex + "\n");
+                    isColumnNameWritten = true;
+                }
                 updateWriter.write(updateFileLineReader + "\n");
             }
         } else if (whereCondition.getOperation().equals(Operation.LESS_THAN)) {
@@ -500,6 +510,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
                         System.out.println(rename);
                     }
                     System.out.println(updateFileLineReader);
+                }
+                if (!isColumnNameWritten) {
+                    updateWriter.write(columnIndex + "\n");
+                    isColumnNameWritten = true;
                 }
                 updateWriter.write(updateFileLineReader + "\n");
             }
@@ -517,6 +531,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
                     }
                     System.out.println(updateFileLineReader);
                 }
+                if (!isColumnNameWritten) {
+                    updateWriter.write(columnIndex + "\n");
+                    isColumnNameWritten = true;
+                }
                 updateWriter.write(updateFileLineReader + "\n");
             }
         }
@@ -532,6 +550,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
     @Override
     public DatabaseResponse deleteTable(String tableName, WhereCondition whereCondition) throws IOException {
+        if(checkLock()) {
+            QueryConstants.DB_PATH = QueryConstants.TRANSACTION_DB_PATH;
+        }
+
         if(QueryConstants.CURRENT_DB=="") {
             Utility.displayMessage("Please select a database");
             return new DatabaseResponse(false,"Please select a database");

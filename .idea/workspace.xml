@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5af2e7d5-2761-416d-b9f5-9641cf0c229c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/QueryParsingServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/QueryParsingServicesImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
-      <module name="DMW_G13_CENTDB" />
+      <module name="dmw_g13_centdb" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Main.*" />
@@ -87,7 +86,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseServicesTest.createTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DatabaseServicesTest.deleteTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="dmw_g13_centdb" />
       <extension name="coverage">
         <pattern>
@@ -97,7 +96,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="services" />
       <option name="MAIN_CLASS_NAME" value="services.DatabaseServicesTest" />
-      <option name="METHOD_NAME" value="createTable" />
+      <option name="METHOD_NAME" value="deleteTable" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -154,10 +153,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.DatabaseServicesTest.deleteTable" />
         <item itemvalue="JUnit.DatabaseServicesTest.updateTable" />
         <item itemvalue="JUnit.DatabaseServicesTest.selectTable" />
         <item itemvalue="JUnit.DatabaseServicesTest.insertTable" />
-        <item itemvalue="JUnit.DatabaseServicesTest.createTable" />
       </list>
     </recent_temporary>
   </component>
@@ -195,16 +194,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/services/DatabaseServicesImpl.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
