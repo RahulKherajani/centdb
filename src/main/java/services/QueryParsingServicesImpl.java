@@ -22,9 +22,10 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
         String query_type = query.replaceAll (" .*", "");
         query_type = query_type.toLowerCase ();
         DatabaseServices db= new DatabaseServicesImpl();
+        query =query.toLowerCase();
 
 
-            switch(query_type){
+        switch(query_type){
 
                case "create":
 
@@ -120,7 +121,6 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                case "select":
 
                     //query = "SELECT * FROM Customers WHERE Country = 'Mexico';
-//                    query =query.toLowerCase();
 
                     Pattern pattern3 = Pattern.compile("select\\s+(.*?)\\s*from\\s+(.*?)\\s*(where\\s(.*?)\\s*)?;", Pattern.DOTALL);
                     Matcher matcher3 = pattern3.matcher(query);
@@ -142,18 +142,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                             whereCondition.setValue(condition[2].replaceAll("\'", ""));
                         }
                         DatabaseResponse databaseResponse = db.selectTable(tableName,columnName,whereCondition);
-                        if(databaseResponse.isSuccess()) {
-//                            Table tableObj = databaseResponse.getTableData();
-//                            System.out.print("|");
-//                            Arrays.stream(tableObj.getColumns())
-//                                    .forEach(x -> System.out.print(String.format("%10s|", x)));
-//                            System.out.println();
-//                            tableObj.getRows().forEach(x ->
-//                                    Arrays.stream(x).forEach(y -> System.out.print(String.format("%10s|", x)))
-//                            );
-                        } else {
-                            System.out.println("ERROR: " + databaseResponse.getMsg());
-                        }
+
                     }
                     else {
                         System.out.println("Invalid query !!");
@@ -163,8 +152,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                 case "update":
 
                     //UPDATE Customers SET ContactName='Juan' WHERE Country = 'Mexico';
-//                    query=query.toLowerCase();
-                    Pattern pattern4 = Pattern.compile("update\\s(.*?)set\\s(.*?)where\\s(.*?)?;");
+                   Pattern pattern4 = Pattern.compile("update\\s(.*?)set\\s(.*?)where\\s(.*?)?;");
                     Matcher matcher4 = pattern4.matcher(query);
                     boolean match2 = matcher4.matches ();
 
@@ -172,11 +160,13 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         String tableName = matcher4.group (1).trim();
                         String[] columnNameAndValue = matcher4.group(2).split("=");
                         String[] condition = matcher4.group (3).split(" ");
+                        columnNameAndValue[1] = columnNameAndValue[1].substring(1, columnNameAndValue[1].length()-2);
 
                         WhereCondition whereCondition=new WhereCondition();
                         whereCondition.setColumn(condition[0]);
                         whereCondition.setOperation(getOperation(condition[1]));
                         whereCondition.setValue(condition[2].replaceAll("\'",""));
+                        columnNameAndValue[1].replaceAll("\'","");
 
                         DatabaseResponse databaseResponse = db.updateTable(tableName,columnNameAndValue[0].trim(),columnNameAndValue[1].trim(),whereCondition);
                         if(!databaseResponse.isSuccess()){
@@ -192,7 +182,6 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                 case "delete":
 
                     // query = "DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';";
-//                    query =query.toLowerCase();
 
                     Pattern pattern5 = Pattern.compile("delete\\s(.*?)from\\s(.*?)where\\s(.*?)?;");
                     Matcher matcher5 = pattern5.matcher(query);
@@ -216,7 +205,6 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
                 case "drop":
                     //query=DROP TABLE table_name;
-//                    query=query.toLowerCase();
                     Pattern pattern6 = Pattern.compile("drop\\s(.*?)table\\s(.*?)?;");
                     Matcher matcher6 = pattern6.matcher(query);
                     boolean match4 = matcher6.matches();
@@ -229,6 +217,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         System.out.println("Invalid query");
                     }
                     break;
+
                 case "begin":
                     query = query.replaceAll(";", "");
                     if(query.equalsIgnoreCase("BEGIN TRANSACTION")){
@@ -238,6 +227,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                         System.out.println("Invalid query");
                     }
                     break;
+
                 case "commit":
                 case "rollback":
                     query = query.replaceAll(";", "");
