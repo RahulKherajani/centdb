@@ -1,14 +1,13 @@
 package services;
 
+import Constants.Datatype;
 import Constants.Operation;
 import model.Column;
 import model.Table;
 import model.WhereCondition;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,71 +25,85 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
                case "create":
 
-                   query = "CREATE TABLE Persons (PersonID int, Name string, Gender boolean, Salary double, PRIMARY KEY (PersonID));";
-                   query =query.toLowerCase();
+                   // String create_query = "CREATE TABLE Customer (COL1 char PRIMARY KEY, COL3 int FOREIGN KEY REFERENCES table col3);";
                    String[] words = query.split(" ");
 
-                    if(words[1]=="database") {
+                    if(query.toLowerCase(Locale.ROOT).split(" ")[1]=="database") {
                         db.createDatabase(words[2]);
                     }
 
-                    else if(words[2]=="table"){
+                    else if(query.toLowerCase(Locale.ROOT).split(" ")[2]=="table"){
 
-                       query =query.toLowerCase();
-                       String CREATE_QUERY_OUTER = "CREATE\\sTABLE\\s(\\w+)\\s";
+                        String outerCreateQuery = "CREATE\\sTABLE\\s(\\w+)\\s";
+                        String innerCreateQuery = "\\(((?:\\s*\\w+\\s+\\w+\\(?[0-9]*\\)?,?)+)\\);";
+                        Pattern pattern1 = Pattern.compile(outerCreateQuery + innerCreateQuery);
+                        Matcher matcher1 = pattern1.matcher(query);
+                        List<Column> columnList=new ArrayList();
 
-                       String CREATE_QUERY_INNER = "\\(((?:\\w+\\s\\w+\\(?[0-9]*\\)?,?)+)\\);";
+                        if (matcher1.matches()) {
+                            String tableName = matcher1.group(1);
+                            String columnString = matcher1.group(2);
+                            String[] columns = columnString.split("\\,");
 
-                       Pattern pattern3 = Pattern.compile(CREATE_QUERY_OUTER + CREATE_QUERY_INNER);
+                            for (int i = 0; i < columns.length; i++) {
+                                Column columnObject=new Column();
 
-                       Matcher matcher3 = pattern3.matcher(query);
-                       matcher3.find();
-                       boolean match = matcher3.matches ();
-                       if(match == true) {
+                                String column = columns[i].trim();
+                                String columnName = column.substring(0, column.indexOf(' '));
+                                columnObject.setColumnName(columnName);
 
-                           String columnName = matcher3.group(1);
-                           String tableName = matcher3.group(2);
-                           String condition[] = matcher3.group(4).split(" ");
-                            //create
+                                String temp = column.substring(column.indexOf(' ')).trim();
+                                String dataType = temp.substring(0, temp.indexOf(' '));
+                                columnObject.setDatatype(Datatype.valueOf(dataType));
 
-                       }
+                                String constraint = temp.substring(temp.indexOf(' '));
+                                String[] constraints = {constraint};
+                                columnObject.setConstraints(constraints);
+
+                                columnList.add(columnObject);
+                            }
+
+                            db.createTable(tableName,columnList);
+
+                        }
+                        else{
+                            System.out.println("Invalid query !!");
+                        }
                     }
-                   else {
-                       System.out.println("Invalid query !!");
-                   }
                    break;
+
 
                 case "use":
                     query = query.replaceAll(";", "");
                     String[] words1 = query.split(" ");
-                    String db_name = words1[1];
-                    db.useDatabase(db_name);
+                    String dbName = words1[1];
+                    db.useDatabase(dbName);
                     break;
 
 
                 case "insert":
-                    Pattern pattern = Pattern.compile("insert into\\s(.*?)\\s(.*?)\\svalues\\s(.*?);", Pattern.DOTALL);
-                    Matcher matcher = pattern.matcher(query);
-                    matcher.find();
+                    Pattern pattern2 = Pattern.compile("insert into\\s(.*?)\\s(.*?)\\svalues\\s(.*?);", Pattern.DOTALL);
+                    Matcher matcher2 = pattern2.matcher(query);
+                    matcher2.find();
 
-                    String table = matcher.group(1);
-                    String[] columns = matcher.group(2)
+                    String table = matcher2.group(1);
+                    String[] columns = matcher2.group(2)
                             .replaceAll("[\\[\\](){}]","")
                             .replace(" ","")
                             .split(",");
-                    String[] rows = matcher.group(3)
+                    String[] rows = matcher2.group(3)
                             .replaceAll("[\\[\\](){}]","")
                             .replace(" ","")
                             .replace("'","")
                             .replace("\"","")
                             .split(",");
 
-                    ArrayList<String[]> row_values = new ArrayList<>();
-                    row_values.add(rows);
+                    ArrayList<String[]> rowValues = new ArrayList<>();
+                    rowValues.add(rows);
 
                     Table table1 = new Table();
                     table1.setColumns(columns);
-                    table1.setRows(row_values);
+                    table1.setRows(rowValues);
 
                     db.insertTable(table,table1);
                     break;
@@ -100,15 +113,16 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                     //query = "SELECT * FROM Customers WHERE Country = 'Mexico';
                     query =query.toLowerCase();
 
-                    Pattern pattern1 = Pattern.compile("select\\s+(.*?)\\s*from\\s+(.*?)\\s*(where\\s(.*?)\\s*)?;", Pattern.DOTALL);
-                    Matcher matcher1 = pattern1.matcher(query);
-                    matcher1.find();
-                    boolean match = matcher1.matches ();
+                    Pattern pattern3 = Pattern.compile("select\\s+(.*?)\\s*from\\s+(.*?)\\s*(where\\s(.*?)\\s*)?;", Pattern.DOTALL);
+                    Matcher matcher3 = pattern3.matcher(query);
+                    matcher3.find();
+                    boolean match = matcher3.matches ();
+
                     if(match == true) {
 
-                        String columnName = matcher1.group(1);
-                        String tableName = matcher1.group (2);
-                        String[] condition = matcher1.group (4).split(" ");
+                        String columnName = matcher3.group(1);
+                        String tableName = matcher3.group (2);
+                        String[] condition = matcher3.group (4).split(" ");
 
                         WhereCondition whereCondition=new WhereCondition();
                         whereCondition.setColumn(condition[0]);
@@ -126,14 +140,14 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
 
                     //UPDATE Customers SET ContactName='Juan' WHERE Country = 'Mexico';
                     query=query.toLowerCase();
-                    Pattern pattern2 = Pattern.compile("update\\s(.*?)set\\s(.*?)where\\s(.*?)?;");
-                    Matcher matcher2 = pattern2.matcher(query);
-                    boolean match2 = matcher2.matches ();
+                    Pattern pattern4 = Pattern.compile("update\\s(.*?)set\\s(.*?)where\\s(.*?)?;");
+                    Matcher matcher4 = pattern4.matcher(query);
+                    boolean match2 = matcher4.matches ();
 
                     if(match2) {
-                        String tableName = matcher2.group (1);
-                        String[] columnNameAndValue = matcher2.group(2).split("=");
-                        String[] condition = matcher2.group (3).split(" ");
+                        String tableName = matcher4.group (1);
+                        String[] columnNameAndValue = matcher4.group(2).split("=");
+                        String[] condition = matcher4.group (3).split(" ");
 
                         WhereCondition whereCondition=new WhereCondition();
                         whereCondition.setColumn(condition[0]);
@@ -157,7 +171,7 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                     Matcher matcher5 = pattern5.matcher(query);
                     boolean match3 = matcher5.matches ();
 
-                    if(match3 == true) {
+                    if(match3) {
                         String tableName = matcher5.group (2);
                         String condition[] = matcher5.group (3).split(" ");
 
@@ -176,12 +190,12 @@ public class QueryParsingServicesImpl implements QueryParsingServices {
                 case "drop":
                     //query=DROP TABLE table_name;
                     query=query.toLowerCase();
-                    Pattern pattern4 = Pattern.compile("drop\\s(.*?)table\\s(.*?)?;");
-                    Matcher matcher4 = pattern4.matcher(query);
-                    boolean match4 = matcher4.matches();
+                    Pattern pattern6 = Pattern.compile("drop\\s(.*?)table\\s(.*?)?;");
+                    Matcher matcher6 = pattern6.matcher(query);
+                    boolean match4 = matcher6.matches();
 
                     if (match4) {
-                        String tableName = matcher4.group(2);
+                        String tableName = matcher6.group(2);
                         db.dropTable(tableName);
                     }
                     else {
