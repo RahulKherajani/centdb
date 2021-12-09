@@ -4,7 +4,6 @@ import Constants.Operation;
 import Constants.QueryConstants;
 import Utility.Utility;
 import exceptions.DatabaseException;
-import logmanagement.EventLogWriter;
 import model.Column;
 import model.DatabaseResponse;
 import model.Table;
@@ -39,11 +38,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         boolean  isCreated = file.mkdir();
         Utility.displayMessage("Database created successfully");
-        
-    	//Event Logs
-        String eventLogMessage = "Database:"+dbName+" created";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
         return new DatabaseResponse(isCreated,"Database created successfully");
     }
 
@@ -54,13 +48,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
             QueryConstants.CURRENT_DB = dbName;
             Utility.displayMessage("Selected the database");
             System.out.println();
-        	
-            //Event Logs
-            String eventLogMessage = "Database:"+dbName+" selected";
-            EventLogWriter.addEventLog(eventLogMessage);
-            
             return new DatabaseResponse(true,"Selected the database"+dbName);
-            
         } else {
             Utility.displayMessage("Database does not exist");
             return new DatabaseResponse(false,"Database does not exist");
@@ -87,11 +75,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
             isCreated = file.createNewFile();
 
         } catch (IOException e) {
-        	
-        	//Event Logs
-            String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" creation failed.";
-            EventLogWriter.addEventLog(eventLogMessage);
-            
             e.printStackTrace();
         }
 
@@ -119,11 +102,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         metadataServices.insertColumnDetailsTable(table);
         Utility.displayMessage("Created");
-        
-    	//Event Logs
-        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" Created";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
         return new DatabaseResponse(true,"Created "+tableName);
     }
 
@@ -162,11 +140,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
         columnNameWriter.write(insertValuesStringBuilder.toString());
         columnNameWriter.close();
         Utility.displayMessage("Inserted successfully");
-        
-    	//Event Logs
-        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" updated";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
         return new DatabaseResponse(true,"Inserted successfully"+tableName);
     }
 
@@ -297,7 +270,29 @@ public class DatabaseServicesImpl implements DatabaseServices{
         } else {
             String[] splitColumns = columns.split(","); // name,id
             if (splitColumns.length == 1) {
-                if (whereCondition.getOperation().equals(Operation.GREATER_THAN)) {
+                if (whereCondition == null) {
+                    BufferedReader columnLineReader = new BufferedReader(new FileReader(tablePath));
+                    String firstLine = columnLineReader.readLine();
+                    String[] columnsFromFirstLine = firstLine.split("~");
+                    columnLineReader.close();
+
+                    for (String column : columnsFromFirstLine) {
+                        if (column.contentEquals(splitColumns[0])) {
+                            indexOfColumnUserRequested = counterColumn;
+                        }
+                        counterColumn += 1;
+                    }
+
+                    BufferedReader selectReader = new BufferedReader(new FileReader(tablePath));
+                    String lineFromSelectReader = null;
+                    String row = "";
+                    while ((lineFromSelectReader = selectReader.readLine()) != null) {
+                        String[] rowWords = lineFromSelectReader.split("~");
+                        System.out.println(rowWords[indexOfColumnUserRequested]);
+                    }
+                    selectReader.close();
+                }
+                else if (whereCondition.getOperation().equals(Operation.GREATER_THAN)) {
                     // select name from users where id>5 // name and id are columns
 
                     BufferedReader columnLineReader = new BufferedReader(new FileReader(tablePath));
@@ -538,7 +533,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
             }
         } else {
             for (String column2 : columnIndexColumns) {
-                if (column2.contentEquals(whereCondition.getColumn())) {
+                if (column2.contentEquals(column)) {
                     columnCounter = columnIndexCounter;
                 }
                 columnIndexCounter += 1;
@@ -615,11 +610,8 @@ public class DatabaseServicesImpl implements DatabaseServices{
         file.delete();
         createTempFile.renameTo(file);
 
-    	//Event Logs
-        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" updated";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
-        return new DatabaseResponse(true,"Updated successfully"+tableName);
+
+        return new DatabaseResponse(true,"Selected successfully"+tableName);
     }
 
     @Override
@@ -668,12 +660,7 @@ public class DatabaseServicesImpl implements DatabaseServices{
         createTempDeleteFile.renameTo(file);
 
         Utility.displayMessage("Deleted row");
-        
-    	//Event Logs
-        String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" updated";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
-        return new DatabaseResponse(true,"Deleted successfully from "+tableName);
+        return new DatabaseResponse(true,"Inserted successfully"+tableName);
     }
 
     @Override
@@ -689,13 +676,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
             if (success) {
                 Utility.displayMessage("success");
-                metadataServices.dropTable(tableName);
-            	//Event Logs
-                String eventLogMessage = "Database:"+QueryConstants.CURRENT_DB+" Table:"+tableName+" dropped";
-                EventLogWriter.addEventLog(eventLogMessage);
                 return new DatabaseResponse(true, tableName + " has been deleted successfully");
             }
         }
+        metadataServices.dropTable(tableName);
         return new DatabaseResponse(false, tableName + " Error deleting");
     }
 
@@ -708,11 +692,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
         File destDir = new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB);
         FileUtils.copyDirectory(srcDir, destDir);
         lock += 1;
-        
-    	//Event Logs
-        String eventLogMessage = "Transaction Started";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
         return new DatabaseResponse(true, "TRANSACTION STARTED");
     }
 
@@ -725,14 +704,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
             FileUtils.copyDirectory(srcDir, destDir);
             FileUtils.deleteDirectory(new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB));
         }else if(transactionEndKeyword.equalsIgnoreCase("ROLLBACK")){
+            QueryConstants.DB_PATH = QueryConstants.DB_PATH_PERMANENT;
             FileUtils.deleteDirectory(new File(QueryConstants.TRANSACTION_DB_PATH+QueryConstants.CURRENT_DB));
         }
         lock -= 1;
-        
-    	//Event Logs
-        String eventLogMessage = "Transaction Ended";
-        EventLogWriter.addEventLog(eventLogMessage);
-        
         return new DatabaseResponse(true, "TRANSACTION ENDED");
     }
 
@@ -743,4 +718,6 @@ public class DatabaseServicesImpl implements DatabaseServices{
         }
         return true;
     }
+
+
 }
