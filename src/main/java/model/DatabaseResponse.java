@@ -5,6 +5,13 @@ public class DatabaseResponse {
     private String msg;
     private Table tableData;
 
+    public DatabaseResponse(){}
+
+    public DatabaseResponse(boolean success, String msg) {
+        this.success = success;
+        this.msg = msg;
+    }
+
     public boolean isSuccess() {
         return success;
     }

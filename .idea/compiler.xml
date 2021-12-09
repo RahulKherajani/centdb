@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DMW_G13_CENTDB" />
+        <module name="dmw_g13_centdb" />
       </profile>
     </annotationProcessing>
   </component>

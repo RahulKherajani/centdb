@@ -1,15 +1,24 @@
 package User;
 
 import Constants.MenuConstants;
+import Constants.QueryConstants;
 import Utility.Utility;
+import analytics.AnalyticsQueryParser;
+
+import exceptions.DatabaseException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import services.ExportAndREServicesImpl;
+import services.MetadataServicesImpl;
+import services.QueryParsingServicesImpl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
+import javax.management.Query;
 
 public class UserMenuDriver {
 
@@ -25,18 +34,20 @@ public class UserMenuDriver {
         fileOp = new FileOperations();
     }
 
-    public void showForm() throws IOException, ParseException, NoSuchAlgorithmException {
+    public void showForm() throws IOException, ParseException, NoSuchAlgorithmException, DatabaseException {
 
-        Utility.displayMessage(MenuConstants.Form.getValue());
-        String formInput = Utility.receiveInput();
+        do {
+            Utility.displayMessage(MenuConstants.Form.getValue());
+            String formInput = Utility.receiveInput();
 
-        if (formInput.contentEquals(MenuConstants.Selected1Registration.getValue())) {
-            showRegisterForm();
-        } else if (formInput.contentEquals(MenuConstants.Selected2Login.getValue())){
-            showLoginForm();
-        } else {
-            Utility.displayMessage(MenuConstants.IncorrectFormInput.getValue());
-        }
+            if (formInput.contentEquals(MenuConstants.Selected1Registration.getValue())) {
+                showRegisterForm();
+            } else if (formInput.contentEquals(MenuConstants.Selected2Login.getValue())) {
+                showLoginForm();
+            } else {
+                Utility.displayMessage(MenuConstants.IncorrectFormInput.getValue());
+            }
+        }while (true);
     }
 
     public void showRegisterForm() throws IOException, NoSuchAlgorithmException, ParseException {
@@ -54,7 +65,6 @@ public class UserMenuDriver {
             profile.setSecurityQuestion( Utility.receiveInput());
             Utility.displayMessage(MenuConstants.EnterSecurityQuestionAnswer.getValue());
             profile.setSecurityAnswer(Utility.receiveInput());
-            Utility.displayMessage(profile.toString());
 
             fileOp.writeToFile(profile);
         } else {
@@ -63,7 +73,7 @@ public class UserMenuDriver {
 
     }
 
-    public void showLoginForm() throws IOException, ParseException, NoSuchAlgorithmException {
+    public void showLoginForm() throws IOException, ParseException, NoSuchAlgorithmException, DatabaseException {
 
         Utility.displayMessage(MenuConstants.EnterName.getValue());
         String id = Utility.receiveInput();
@@ -74,6 +84,7 @@ public class UserMenuDriver {
         validateUser(id, pwd);
 
         if (isSuccessfulValidation) {
+        	QueryConstants.CURRENT_USER = id;
             displayQueriesMenu();
         } else {
             Utility.displayMessage(MenuConstants.InvalidCredentials.getValue());
@@ -95,11 +106,47 @@ public class UserMenuDriver {
         return isDuplicateUser;
     }
 
-
-
     // place holder. delete later
-    public void displayQueriesMenu() {
-        Utility.displayMessage("QUERIES MENU");
+    public void displayQueriesMenu() throws IOException, DatabaseException {
+        int userInput = 0;
+        do {
+            Utility.displayMessage("QUERIES MENU");
+            Utility.displayMessage("1.Write Queries");
+            Utility.displayMessage("2.Export");
+            Utility.displayMessage("3.Data Model");
+            Utility.displayMessage("4.Analytics");
+            Utility.displayMessage("5.Exit");
+            userInput = Integer.parseInt(Utility.receiveInput());
+            switch (userInput) {
+                case 1:
+                    Utility.displayMessage("Write Queries");
+                    new QueryParsingServicesImpl().receiveQuery();
+                    break;
+                case 2:
+                    Utility.displayMessage("Export");
+                    System.out.println("Enter the file Path:");
+                    String filePath = Utility.receiveInput();
+                    new ExportAndREServicesImpl().exportStructure(filePath);
+                    break;
+                case 3:
+                    Utility.displayMessage("Data Model");
+                    System.out.println("Enter the file Path:");
+                    String filePath2 = Utility.receiveInput();
+                    new ExportAndREServicesImpl().reverseEngineering(filePath2);
+                    break;
+                case 4:
+                    Utility.displayMessage("Write Analytics Query");
+                    AnalyticsQueryParser ana = new AnalyticsQueryParser();
+                    ana.receiveQuery();
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Invalid option selected. Kindly retry");
+                    break;
+            }
+        }while (userInput!=5);
+        System.out.println("Exiting the Program");
     }
 
     public Boolean validateUser(String id, String pwd) throws IOException, ParseException, NoSuchAlgorithmException {

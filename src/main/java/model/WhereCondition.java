@@ -7,6 +7,13 @@ public class WhereCondition {
     private Operation operation;
     private String value;
 
+    public WhereCondition(){}
+
+    public WhereCondition(String column, String value) {
+        this.column = column;
+        this.value = value;
+    }
+
     public String getColumn() {
         return column;
     }
@@ -29,5 +36,14 @@ public class WhereCondition {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "WhereCondition{" +
+                "column='" + column + '\'' +
+                ", operation=" + operation +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

@@ -7,6 +7,7 @@ public class Table {
     private ArrayList<String[]> rows;
     private int columnCount;
 
+
     public String[] getColumns() {
         return columns;
     }
@@ -16,7 +17,7 @@ public class Table {
     }
 
     public ArrayList<String[]> getRows() {
-        if(rows.isEmpty()){
+        if(rows == null || rows.isEmpty()){
             rows = new ArrayList<>();
         }
         return rows;
@@ -27,7 +28,7 @@ public class Table {
     }
 
     public void setRow(String[] rows) {
-        if(this.rows.isEmpty()){
+        if(this.rows == null){
             this.rows = new ArrayList<>();
         }
         this.rows.add(rows);
