@@ -676,10 +676,10 @@ public class DatabaseServicesImpl implements DatabaseServices{
 
             if (success) {
                 Utility.displayMessage("success");
+                metadataServices.dropTable(tableName);
                 return new DatabaseResponse(true, tableName + " has been deleted successfully");
             }
         }
-        metadataServices.dropTable(tableName);
         return new DatabaseResponse(false, tableName + " Error deleting");
     }
 
