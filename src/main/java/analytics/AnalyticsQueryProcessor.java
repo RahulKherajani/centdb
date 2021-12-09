@@ -112,7 +112,7 @@ public class AnalyticsQueryProcessor {
 		String[] fields = query.split(" ");
 		String operation = fields[1];
 		String database = fields[3];
-		String message = "Query:"+query+";"+"~";
+		String message = "Query:"+query+";"+"~Result:";
 		
 		try {
 			tables = metaServices.getTables(database);
